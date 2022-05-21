@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="LoadShaders.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="ShaderUtil.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="LoadShaders.h" />
+    <ClInclude Include="ShaderUtil.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\ColorCircle1.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\ColorCircle1.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\ColorCircle2.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\ColorCircle2.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\ColorCircle3.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\ColorCircle3.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\ColorCircle4.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\ColorCircle4.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\ColorCircle5.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\ColorCircle5.vert">
+      <Filter>Shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{c86afa21-fa61-4aa0-8eb3-6bdf1a2f4896}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
