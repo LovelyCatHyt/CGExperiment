@@ -8,6 +8,10 @@
 
 - Visual Studio > 2019, 已安装 msvc 套件
 - OpenGL > 某个版本, 大概是 430
+- 开源库 glew, glut 的头文件和库文件, 放在解决方案目录下, 结构为:
+  - include: 头文件
+  - lib: .lib 静态链接库
+  - bin: .dll 动态链接库
 
 运行方法:
 
