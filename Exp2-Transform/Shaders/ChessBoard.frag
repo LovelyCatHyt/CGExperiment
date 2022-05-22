@@ -2,15 +2,16 @@
 in vec4 color;
 in vec2 screenPosition;
 out vec4 fColor;
+uniform vec3 sinTime;
 
 float get_chessBoard(vec2 pos, float scale)
 {
-	// ÆåÅÌ¸ñ
-	// À©´ó, È»ºóÏòÏÂÈ¡Õû
+	// æ£‹ç›˜æ ¼
+	// æ‰©å¤§, ç„¶åŽå‘ä¸‹å–æ•´
 	vec2 scaledPos = 8 * pos;
 	scaledPos.x = scaledPos.x - fract(scaledPos.x);
 	scaledPos.y = scaledPos.y - fract(scaledPos.y);
-	// ÅÐ¶Ï x+y ÆæÅ¼ÐÔ
+	// åˆ¤æ–­ x+y å¥‡å¶æ€§
 	float white = scaledPos.x + scaledPos.y;
 	return step(fract(white/2),0);
 }
@@ -21,7 +22,7 @@ void main()
 	pos = pos * pos;
 	float dist = sqrt(pos.x + pos.y);
 			
-	if(dist>=.5)
+	if(dist>=.5 + 0.2 * sinTime.y)
 	{
 		fColor = vec4(0,0,0,1) + vec4(.6,.6,.6,1) * get_chessBoard(screenPosition.xy, 8);
 	}

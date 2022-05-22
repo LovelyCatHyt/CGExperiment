@@ -10,14 +10,14 @@ SquareDriver square{ 2, 0.8, .333333f };
 
 void init() {
 	// Meshes------------------------------------------------------------------------------
-	// Èı½ÇĞÎ
+	// ä¸‰è§’å½¢
 	auto& triangle = Mesh::GenMesh();
 	triangle.indices = { 2, 1, 0 };
 	triangle.vertices = {
 		{-.25f, -.25f, .0f},
 		{.25f, -.25f, .0f},
 		{.0f, .25f, .0f} };
-	// Õı·½ĞÎ
+	// æ­£æ–¹å½¢
 	auto& square = Mesh::GenMesh();
 	square.indices = { 3, 2, 1, 2, 1, 0 };
 	square.vertices = std::vector<vmath::vec3>{
@@ -29,7 +29,7 @@ void init() {
 	Mesh::Init();
 	// GameObjects-------------------------------------------------------------------------
 	gameObjects = { GameObject{}, GameObject{} };
-	// Î»ÖÃ
+	// ä½ç½®
 	auto& tran1 = gameObjects[0].GetTransform();
 	tran1.SetPosition({ 0, -0.5, 0 });
 	tran1.SetRotation({ 0, 0, 90 });
@@ -46,12 +46,13 @@ void init() {
 void bindEvents()
 {
 	gameObjects[1].AddUpdateListener([&](GameObject& o) { square.Update(o); });
+    square.Awake(gameObjects[1]);
 }
 
 void display() {
-	// ÇåÆÁ (ÆÁÄ»»º³åÇø? »æÖÆ»º³åÇø? Who knows...)
+	// æ¸…å± (å±å¹•ç¼“å†²åŒº? ç»˜åˆ¶ç¼“å†²åŒº? Who knows...)
 	glClearColor(.5, .5, .5, 1);
-	// ÔõÃ´ÓÖ Clear ÁË?
+	// æ€ä¹ˆåˆ Clear äº†?
 	glClear(GL_COLOR_BUFFER_BIT);
 	Time::UpdateTime();
 	for(auto& gameObject:gameObjects)
@@ -68,7 +69,7 @@ void display() {
 }
 
 /// <summary>
-/// ¼üÅÌÊÂ¼ş
+/// é”®ç›˜äº‹ä»¶
 /// </summary>
 /// <param name="key"></param>
 /// <param name="x"></param>
@@ -80,29 +81,29 @@ void keyfunc(GLboolean key, GLint x, GLint y)
 
 int main(int argc, char* argv[])
 {
-	// ³õÊ¼»¯ glut	
+	// åˆå§‹åŒ– glut	
 	glutInit(&argc, argv);
-	// ÏÔÊ¾Ä£Ê½
+	// æ˜¾ç¤ºæ¨¡å¼
 	glutInitDisplayMode(GLUT_RGBA);
-	// ´°¿Ú´óĞ¡
+	// çª—å£å¤§å°
 	glutInitWindowSize(512, 512);
 	// ??
 	glutInitContextVersion(1, 3);
 	// ??
 	glutInitContextProfile(GLUT_CORE_PROFILE);
-	// ´´½¨´°¿Ú, µ«ÊÇÃ»ÈËÖªµÀÕâ¸ö·µ»ØµÄ int ÊÇÊ²Ã´¶«Î÷
+	// åˆ›å»ºçª—å£, ä½†æ˜¯æ²¡äººçŸ¥é“è¿™ä¸ªè¿”å›çš„ int æ˜¯ä»€ä¹ˆä¸œè¥¿
 	glutCreateWindow("ColorCircle Windows");
-	// ³õÊ¼»¯ glew
+	// åˆå§‹åŒ– glew
 	if (glewInit())
 	{
 		std::cerr << "Unable to Initialize GLEW" << std::endl;
 	}
-	// ³õÊ¼»¯
+	// åˆå§‹åŒ–
 	init();
 	bindEvents();
-	// °ó¶¨ÊäÈë
+	// ç»‘å®šè¾“å…¥
 	glutKeyboardFunc(keyfunc);
-	// äÖÈ¾
+	// æ¸²æŸ“
 	glutDisplayFunc(display);
 
 	glutMainLoop();
