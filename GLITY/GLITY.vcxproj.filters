@@ -51,6 +51,12 @@
     <ClInclude Include="Glity-All.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="GlityEntry.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GLITY.cpp">
@@ -81,6 +87,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="ShaderUtil.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GlityEntry.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
