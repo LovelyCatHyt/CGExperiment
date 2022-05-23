@@ -32,10 +32,15 @@ int MeshRenderer::GetShader(const char* shaderPathNoExtension)
     return PathToProgramDict[shaderPathNoExtension];
 }
 
-MeshRenderer::MeshRenderer(Mesh* mesh, const char* shaderPathNoExtension):Component(nullptr), _mesh(mesh)
+int MeshRenderer::GetShader(const char* vertShaderPath, const char* fragShaderPath)
 {
-    shaderProgram = GetShader(shaderPathNoExtension);
+    return ShaderUtil::LoadShaderByName(vertShaderPath, fragShaderPath);
 }
+
+//MeshRenderer::MeshRenderer(Mesh* mesh, const char* shaderPathNoExtension):Component(nullptr), _mesh(mesh)
+//{
+//    shaderProgram = GetShader(shaderPathNoExtension);
+//}
 
 MeshRenderer::MeshRenderer(GameObject& obj, Mesh* mesh, const char* shaderPathNoExtension) :
     Component(obj),
@@ -43,6 +48,14 @@ MeshRenderer::MeshRenderer(GameObject& obj, Mesh* mesh, const char* shaderPathNo
 {
     shaderProgram = GetShader(shaderPathNoExtension);
 	obj.RegisterRenderer(*this);
+}
+
+MeshRenderer::MeshRenderer(GameObject& obj, Mesh* mesh, const char* vertShaderPath, const char* fragShaderPath) :
+    Component(obj),
+    _mesh(mesh)
+{
+    shaderProgram = GetShader(vertShaderPath, fragShaderPath);
+    obj.RegisterRenderer(*this);
 }
 
 GLint MeshRenderer::GetUniformLoc(const char* uniformName) const

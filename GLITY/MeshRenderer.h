@@ -9,6 +9,7 @@ private:
 	static std::map<std::string, GLuint> PathToProgramDict;
     
     static int GetShader(const char* shaderPathNoExtension);
+    static int GetShader(const char* vertShaderPath, const char* fragShaderPath);
 public:
     static std::vector<MeshRenderer> renderers;
     static const GLint projectMatLoc = 0;
@@ -18,9 +19,8 @@ public:
 	MeshRenderer() = delete;
     MeshRenderer(MeshRenderer&& other) noexcept;
 	MeshRenderer(GameObject& obj, Mesh* mesh, GLuint shaderProgram);
-    
-    MeshRenderer(Mesh* mesh, const char* shaderPathNoExtension);
-	MeshRenderer(GameObject& obj, Mesh* mesh, const char* shaderPathNoExtension);
+    MeshRenderer(GameObject& obj, Mesh* mesh, const char* shaderPathNoExtension);
+    MeshRenderer(GameObject& obj, Mesh* mesh, const char* vertShaderPath, const char* fragShaderPath);
 
     GLint GetUniformLoc(const char* uniformName) const;
 	void Display() const;

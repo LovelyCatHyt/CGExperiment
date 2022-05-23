@@ -9,8 +9,8 @@
 const std::string ShaderUtil::DefaultShaderDir = "Shaders/";
 
 /// <summary>
-/// string ×ªĞ¡Ğ´
-/// <para>¾ÓÈ»»¹ÒªÈÃÎÒÊÖ¶¯±éÀú, ÕâÊÇ·ñÓĞĞ©ÀëÆ×</para>
+/// string è½¬å°å†™
+/// <para>å±…ç„¶è¿˜è¦è®©æˆ‘æ‰‹åŠ¨éå†, è¿™æ˜¯å¦æœ‰äº›ç¦»è°±</para>
 /// </summary>
 /// <param name="s"></param>
 /// <returns></returns>
@@ -42,7 +42,7 @@ GLuint ShaderUtil::LoadShaderByName(const std::string& shaderPathNoExtension)
 	const auto vertPath = shaderPathNoExtension + ".vert";
 	infos.emplace_back(ShaderInfo{ GL_VERTEX_SHADER, vertPath.c_str(), 0 });
 
-	// ¼ì²âÊÇ·ñ´æÔÚÆ¬Ôª×ÅÉ«Æ÷, ´æÔÚÔò¼Ó½øÈ¥
+	// æ£€æµ‹æ˜¯å¦å­˜åœ¨ç‰‡å…ƒç€è‰²å™¨, å­˜åœ¨åˆ™åŠ è¿›å»
 	const auto fragPath = shaderPathNoExtension + ".frag";
 	const std::ifstream temp(fragPath);
 	if (temp.good())
@@ -50,8 +50,20 @@ GLuint ShaderUtil::LoadShaderByName(const std::string& shaderPathNoExtension)
 		infos.emplace_back(ShaderInfo{ GL_FRAGMENT_SHADER, fragPath.c_str(), 0 });
 	}
 	infos.emplace_back(ShaderInfo{ GL_NONE, NULL, 0 });
-	// ¼ÓÔØ Shader
+	// åŠ è½½ Shader
 	return LoadShaders(infos.cbegin()._Ptr);
+}
+
+GLuint ShaderUtil::LoadShaderByName(const std::string& vertShaderPath, const std::string& fragShaderPath)
+{
+    ShaderInfo infos[] = 
+    {
+        { GL_VERTEX_SHADER, vertShaderPath.c_str(), 0 },
+        { GL_FRAGMENT_SHADER, fragShaderPath.c_str(), 0 },
+        { GL_NONE, NULL, 0 }
+    };
+    // åŠ è½½ Shader
+    return LoadShaders(infos);
 }
 
 std::vector<GLuint> ShaderUtil::LoadAllShaders()

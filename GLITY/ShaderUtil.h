@@ -7,11 +7,12 @@ class ShaderUtil
 {
 private:
 	/// <summary>
-	/// Ä¬ÈÏ Shader ÎÄ¼þ¼Ð
+	/// é»˜è®¤ Shader æ–‡ä»¶å¤¹
 	/// </summary>
 	static const std::string DefaultShaderDir;
 	static std::vector<std::string> ScanShaderNames(const std::string& path);
 public:
 	static GLuint LoadShaderByName(const std::string& shaderPathNoExtension);
+    static GLuint LoadShaderByName(const std::string& vertShaderPath, const std::string& fragShaderPath);
 	static std::vector<GLuint> LoadAllShaders();
 };
