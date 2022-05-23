@@ -25,7 +25,7 @@ public:
     [[nodiscard]] GameObject& GameObject() const;
 
     [[nodiscard]] vmath::mat4 LocalToWorldMat4X4() const;
-	// vmath::Tmat4<float> WorldToLocalMat4X4();
+	[[nodiscard]] vmath::Tmat4<float> WorldToLocalMat4X4();
     [[nodiscard]] vmath::vec3 GetPosition() const;
 	void SetPosition(const vmath::vec3& pos);
     [[nodiscard]] vmath::vec3 GetRotation() const;

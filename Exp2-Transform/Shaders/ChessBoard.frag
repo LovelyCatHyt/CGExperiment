@@ -2,7 +2,10 @@
 in vec4 color;
 in vec2 screenPosition;
 out vec4 fColor;
-uniform vec3 sinTime;
+
+layout(location = 0) uniform mat4 projectMat;
+layout(location = 1) uniform mat4 modelMat;
+layout(location = 2) uniform vec3 sinTime;
 
 float get_chessBoard(vec2 pos, float scale)
 {
@@ -18,7 +21,7 @@ float get_chessBoard(vec2 pos, float scale)
 
 void main()
 {
-	vec2 pos = screenPosition.xy;
+	vec2 pos = screenPosition;
 	pos = pos * pos;
 	float dist = sqrt(pos.x + pos.y);
 			

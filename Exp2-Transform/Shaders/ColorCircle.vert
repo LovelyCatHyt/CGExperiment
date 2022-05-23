@@ -2,8 +2,9 @@
 layout(location = 0) in vec3 vPosition;
 out vec4 color;
 out vec2 screenPosition;
-// uniform float ModeColor;
-uniform mat4 modelMat;
+
+layout(location = 0) uniform mat4 projectMat;
+layout(location = 1) uniform mat4 modelMat;
 uniform float time;
 uniform float speed;
 uniform vec2 center;
@@ -45,6 +46,8 @@ mat4(
 void main()
 { 
 	gl_Position = rotateAround * vec4(vPosition, 1);
+    gl_Position = projectMat * gl_Position;
+    gl_Position = gl_Position / gl_Position.w;
 	screenPosition = vPosition.xy;
 	color = vec4(1,0,0,1);
 }

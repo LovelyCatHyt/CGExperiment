@@ -4,14 +4,48 @@
 #include <algorithm>
 #include <utility>
 
+// copilot 打这种代码直接起飞
 template <typename T>
-vmath::Tmat4<T> MatFromEuler(vmath::Tvec3<T> euler)
+vmath::mat4 RotateX(T angle)
+{
+    angle *= 0.01745329251994329547f;
+    return vmath::mat4{
+        vmath::vec4{1, 0, 0, 0},
+        vmath::vec4{0, cos(angle), sin(angle), 0},
+        vmath::vec4{0, -sin(angle), cos(angle), 0},
+        vmath::vec4{0, 0, 0, 1}
+    };
+}
+template <typename T>
+vmath::mat4 RotateY(T angle)
+{
+    angle *= 0.01745329251994329547f;
+    return vmath::mat4{
+        vmath::vec4{cos(angle), 0, -sin(angle), 0},
+        vmath::vec4{0, 1, 0, 0},
+        vmath::vec4{sin(angle), 0, cos(angle), 0},
+        vmath::vec4{0, 0, 0, 1}
+    };
+}
+template <typename T>
+vmath::mat4 RotateZ(T angle)
+{
+    angle *= 0.01745329251994329547f;
+    return vmath::mat4{
+        vmath::vec4{cos(angle), sin(angle), 0, 0},
+        vmath::vec4{-sin(angle), cos(angle), 0, 0},
+        vmath::vec4{0, 0, 1, 0},
+        vmath::vec4{0, 0, 0, 1}
+    };
+}
+
+vmath::mat4 MatFromEuler(vmath::vec3 euler)
 {
     // Rz * Rx * Ry
     return
-        vmath::rotate(euler[2], 0.0f, 0.0f, 1.0f) *
-        vmath::rotate(euler[0], 1.0f, 0.0f, 0.0f) *
-        vmath::rotate(euler[1], 0.0f, 1.0f, 0.0f);
+        RotateZ(euler[2]) *
+        RotateX(euler[0]) *
+        RotateY(euler[1]);
 }
 
 Transform::Transform(vmath::vec3 pos, vmath::vec3 rot, vmath::vec3 scale) :
@@ -64,10 +98,13 @@ vmath::mat4 Transform::LocalToWorldMat4X4() const
     return _mat;
 }
 
-//vmath::Tmat4<float> Transform::WorldToLocalMat4X4()
-//{
-//	
-//}
+vmath::Tmat4<float> Transform::WorldToLocalMat4X4()
+{
+    // 和 Construct 反着写就行了
+    return vmath::scale(1.0f / _scale[0], 1.0f / _scale[1], 1.0f / _scale[2]) *
+           MatFromEuler(-1.0f * _euler) *
+           vmath::translate(-_position[0], -_position[1], -_position[2]);
+}
 
 void Transform::ConstructMat()
 {

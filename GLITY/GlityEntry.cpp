@@ -14,13 +14,13 @@ void GlityEntry::Init()
 
 void GlityEntry::LateUpdate()
 {
-    
+
 }
 
 void GlityEntry::DisplayLoop()
 {
     // 清屏 (屏幕缓冲区? 绘制缓冲区?)
-    glClearColor(.5, .5, .5, 1);
+    glClearColor(0, 0, 0, 1);
     // Clear again
     glClear(GL_COLOR_BUFFER_BIT);
 
@@ -28,11 +28,15 @@ void GlityEntry::DisplayLoop()
     {
         gameObject.Update();
     }
+    for (auto& gameObject : GameObject::gameObjects)
+    {
+        gameObject.LateUpdate();
+    }
     for (const auto& renderer : MeshRenderer::renderers)
     {
         renderer.Display();
     }
-    
+
     glFlush();
     glutPostRedisplay();
     Input::Update();

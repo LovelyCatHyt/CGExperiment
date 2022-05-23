@@ -27,8 +27,8 @@ void TriangleDriver::Update(GameObject& obj)
     glUniform1f(_timeLoc, Time::time);
     glUniform2f(_centerLoc, center[0], center[1]);
     glUniform3f(_sinTimeLoc, sin(Time::time * 0.1f), sin(Time::time), sin(Time::time * 10.0f));
-    const auto left = Input::GetMouseButton(GLUT_LEFT_BUTTON);
-    const auto right = Input::GetMouseButton(GLUT_RIGHT_BUTTON);
+    const auto left = Input::GetKey('z');
+    const auto right = Input::GetKey('x');
     if (left || right)
     {
         glUniform1f(_speedLoc, speed * (left? 1.0f : -1.0f));

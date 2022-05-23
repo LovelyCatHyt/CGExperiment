@@ -3,8 +3,8 @@ in vec4 color;
 in vec2 screenPosition;
 out vec4 fColor;
 
-uniform mat4 projectMat;
-
+layout(location = 0) uniform mat4 projectMat;
+layout(location = 1) uniform mat4 modelMat;
 vec3 rgb2hsv(vec3 c)
 {
     vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);

@@ -157,12 +157,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Glity-All.h" />
     <ClInclude Include="GlityEntry.h" />
     <ClInclude Include="IAwake.h" />
+    <ClInclude Include="ILateUpdate.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="IUpdate.h" />
     <ClInclude Include="LoadShaders.h" />
@@ -177,11 +179,11 @@
     <ClInclude Include="vmath.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GLITY.cpp" />
     <ClCompile Include="GlityEntry.cpp" />
-    <ClCompile Include="IAwake.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="LoadShaders.cpp" />
     <ClCompile Include="Mesh.cpp" />
