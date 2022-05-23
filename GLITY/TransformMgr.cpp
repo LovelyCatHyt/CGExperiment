@@ -3,11 +3,9 @@
 
 std::vector<Transform> TransformMgr::Transforms;
 
-int TransformMgr::GenerateTransform()
+Transform& TransformMgr::GenerateTransform(GameObject& obj)
 {
-	//Transform t{};
-	Transforms.emplace_back();
-	return Transforms.size() - 1;
+	return Transforms.emplace_back(obj);
 }
 
 Transform& TransformMgr::Get(const int& id)

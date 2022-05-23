@@ -18,6 +18,18 @@
 - 用 Visual Studio 打开, 然后选择 Debug x64 模式(默认选项)构建并运行.
 - 没有 CMake 这个选项, 因为 [这个开发者](https://github.com/LovelyCatHyt) 不会写 CMake
 
+## 项目结构
+
+- 非本人编写的参考代码
+  - 2DHomogeneous, 3DTransform 是从老师那里 copy 下来的示例项目, 最后完成之前会删掉
+  - vmath.h, LoadShader.h, LoadShader.cpp: 同上, 但是可复用性比较高, 所以也直接拿来用. 不过为了方便传输数据, vmath 相关类加了个成员函数
+  - Exp1-FragShaders: 魔改自示例项目
+- GLITY: 或称 Glity, GL + Unity = GLITY, 按照类似 Unity 的方式在 OpenGL+glut+glew 上面搭的封装. 具体内容见[下文](#GLITY)
+- Exp1-FragShaders: 5个片元着色器, **未使用 Glity**
+  - 支持按照 shader 名分类shader, 并运行时切换 shader
+- Exp2-Transform: 位移, 旋转, 缩放, 绕指定点的旋转缩放, **使用 Glity**
+  - 同时也是验证 Glity 的第一个可执行项目
+
 ## GLITY
 
 已实现与待实现功能列表:
@@ -38,6 +50,9 @@
   - [x] 三角形数据
 - [x] MeshRenderer 渲染物体
 - [x] 逐 GameObejct 的更新回调
+- [ ] AddComponent
+  - [ ] 主要是添加 Update, LateUpadte, Awake, 之类的东西
+  - [ ] 使用 IUpdate 等抽象类来判断是否需要注册相应的监听事件
 - [ ] 完全控制 GameLoop
   - [ ] FixedUpdate 与 Update 分离
   - [x] 扫描输入, 为 Input.Getxxx 做准备

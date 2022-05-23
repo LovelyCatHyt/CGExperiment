@@ -3,14 +3,19 @@
 #include <vector>
 #include <functional>
 
+class IUpdate;
+class Component;
 class MeshRenderer;
 
 class GameObject
 {
 private:
-	int _transformId;
+	Transform* _transform;
 	MeshRenderer* _renderer;
-	std::vector<std::function<void(GameObject&)>> _updateCallBacks;
+    std::vector<Component*> _components;
+    std::vector<IUpdate*> _updatables;
+    friend Transform::Transform(::GameObject& obj);
+    friend Transform::Transform(Transform&& other) noexcept;
 public:
     static std::vector<GameObject> gameObjects;
 
@@ -22,5 +27,27 @@ public:
 	/// 更新 GameObject, 需要每帧调用一次
 	/// </summary>
 	void Update();
-	void AddUpdateListener(const std::function<void(GameObject&)>& callback);
+    /// <summary>
+    /// 添加用于监听 GameObject 事件的 Component
+    /// </summary>
+    void AddComponent(Component& component);
+    template <class T>
+    T& GetComponent();
 };
+
+template <class T>
+T& GameObject::GetComponent()
+{
+    for (auto* _com : _components)
+    {
+        T* temp = dynamic_cast<T*>(_com);
+        if(temp) return *temp;
+    }
+    return *static_cast<T*>(nullptr);
+}
+
+template <>
+inline MeshRenderer& GameObject::GetComponent<MeshRenderer>()
+{
+    return Renderer();
+}

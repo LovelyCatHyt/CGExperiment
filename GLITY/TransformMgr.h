@@ -6,7 +6,7 @@ class TransformMgr
 private:
 	static std::vector<Transform> Transforms;
 public:
-	static int GenerateTransform();
+	static Transform& GenerateTransform(GameObject& obj);
 	static Transform& Get(const int& id);
 	static void Remove(Transform&);
 };

@@ -37,7 +37,7 @@ void MeshRenderer::BindGameObject(GameObject& obj)
 
 void MeshRenderer::BindGameObject(GameObject* objPtr)
 {
-	_gameObjectPtr = objPtr;
+	_gameObject = objPtr;
 	objPtr->RegisterRenderer(*this);
 }
 
@@ -51,4 +51,9 @@ void MeshRenderer::Display() const
 	glUniformMatrix4fv(modelMatLoc, 1, GL_FALSE, transform.LocalToWorldMat4X4().raw());
 	// glBindBuffer(GL_ARRAY_BUFFER, _mesh->vboId);
 	glDrawElements(_mesh->drawType, static_cast<GLsizei>(_mesh->indices.size()), GL_UNSIGNED_INT, 0);
+}
+
+std::string MeshRenderer::Name()
+{
+    return "MeshRendererDefaultName";
 }

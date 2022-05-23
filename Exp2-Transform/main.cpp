@@ -1,6 +1,5 @@
 #include "stdafx.h"
 
-#include "Time.h"
 #include "../GLITY/Glity-All.h"
 #include "SquareDriver.h"
 
@@ -44,23 +43,10 @@ void init() {
 
 void bindEvents()
 {
-    GameObject::gameObjects[1].AddUpdateListener([&](GameObject& o) { square.Update(o); });
+    // GameObject::gameObjects[1].AddUpdateListener([&](GameObject& o) { square.Update(o); });
+    GameObject::gameObjects[1].AddComponent(square);
+    // std::cout<<GameObject::gameObjects[1].GetComponent<SquareDriver>().Name();
     square.Awake(GameObject::gameObjects[1]);
-}
-
-void display() {
-    
-}
-
-/// <summary>
-/// 键盘事件
-/// </summary>
-/// <param name="key"></param>
-/// <param name="x"></param>
-/// <param name="y"></param>
-void keyfunc(GLboolean key, GLint x, GLint y)
-{
-
 }
 
 int main(int argc, char* argv[])

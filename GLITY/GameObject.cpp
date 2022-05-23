@@ -1,17 +1,17 @@
 #include "pch.h"
-#include "TransformMgr.h"
+#include "Glity-All.h"
 
 std::vector<GameObject> GameObject::gameObjects;
 
 GameObject::GameObject()
 {
-	_transformId = TransformMgr::GenerateTransform();
+	_transform = &TransformMgr::GenerateTransform(*this);
 	_renderer = nullptr;
 }
 
 Transform& GameObject::GetTransform() const
 {
-	return TransformMgr::Get(_transformId);
+	return *_transform;
 }
 
 void GameObject::RegisterRenderer(MeshRenderer& renderer)
@@ -26,13 +26,18 @@ MeshRenderer& GameObject::Renderer() const
 
 void GameObject::Update()
 {
-	for (const auto& updateCallBack : _updateCallBacks)
-	{
-		if(updateCallBack) updateCallBack(*this);
-	}
+    for(auto* updatable: _updatables)
+    {
+        updatable->Update(*this);
+    }
 }
 
-void GameObject::AddUpdateListener(const std::function<void(GameObject&)>& callback)
+void GameObject::AddComponent(Component& component)
 {
-	_updateCallBacks.emplace_back(callback);
+    auto* updatablePtr = dynamic_cast<IUpdate*>(&component);
+    if(updatablePtr)
+    {
+        _updatables.emplace_back(updatablePtr);
+    }
+    _components.emplace_back(&component);
 }

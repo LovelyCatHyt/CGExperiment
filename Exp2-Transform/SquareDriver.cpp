@@ -3,6 +3,7 @@
 #include "Time.h"
 
 SquareDriver::SquareDriver(float loop, float maxScale, float minScale):
+    Component(nullptr), 
 	_timer(0), loop(loop), _sinTimeLoc(0),
 	maxScale(maxScale),
 	minScale(minScale)
@@ -25,4 +26,10 @@ void SquareDriver::Update(GameObject& obj)
 void SquareDriver::Awake(GameObject& obj)
 {
     _sinTimeLoc = obj.Renderer().GetUniformLoc("sinTime");
+    _gameObject = &obj;
+}
+
+std::string SquareDriver::Name()
+{
+    return "SquareDriver";
 }   

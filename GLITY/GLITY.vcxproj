@@ -163,6 +163,7 @@
     <ClInclude Include="Glity-All.h" />
     <ClInclude Include="GlityEntry.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="IUpdate.h" />
     <ClInclude Include="LoadShaders.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshRenderer.h" />

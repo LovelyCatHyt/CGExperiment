@@ -2,8 +2,7 @@
 #include <map>
 #include "pch.h"
 
-class MeshRenderer :
-	public Component
+class MeshRenderer : public virtual Component
 {
 private:	
 	Mesh* const _mesh;
@@ -22,5 +21,6 @@ public:
 	void BindGameObject(GameObject& obj);
 	void BindGameObject(GameObject* objPtr);
 	void Display() const;
+    std::string Name() override;
 };
 
