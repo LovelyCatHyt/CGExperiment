@@ -7,5 +7,6 @@ class GlityEntry
 public:
     static void Init();
     static void LateUpdate();
+    static void DisplayLoop();
 };
 

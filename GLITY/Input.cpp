@@ -3,19 +3,19 @@
 
 bool Input::keyStates[256]{};
 bool Input::prevKeyStates[256]{};
-unsigned char Input::activeKey = 0;
+std::vector<unsigned char> Input::activeKeys{};
 
 bool Input::mouseButtons[3]{};
 bool Input::prevMouseButtons[3]{};
-unsigned char Input::activeMouseButton = 0;
+std::vector<unsigned char> Input::activeMouseButtons{};
 int Input::mousePosition[2]{};
 
 void Input::Init()
 {
-    // ¼üÅÌ
+    // é”®ç›˜
     glutKeyboardFunc(OnKeyboard);
     glutKeyboardUpFunc(OnKeyboardUp);
-    // Êó±ê
+    // é¼ æ ‡
     glutMotionFunc(OnMouseMove);
     glutPassiveMotionFunc(OnMouseMove);
     glutMouseFunc(OnMouseButton);
@@ -24,19 +24,19 @@ void Input::Init()
 void Input::OnKeyboard(unsigned char key, int x, int y)
 {
     keyStates[key] = true;
-    activeKey = key;
+    activeKeys.emplace_back(key);
 }
 
 void Input::OnKeyboardUp(unsigned char key, int x, int y)
 {
     keyStates[key] = false;
-    activeKey = key;
+    activeKeys.emplace_back(key);
 }
 
 void Input::OnMouseButton(int button, int state, int x, int y)
 {
     mouseButtons[button] = state == GLUT_DOWN;
-    activeMouseButton = static_cast<unsigned char>(button);
+    activeMouseButtons.emplace_back(static_cast<unsigned char>(button));
     OnMouseMove(x, y);
 }
 
@@ -48,8 +48,12 @@ void Input::OnMouseMove(int x, int y)
 
 void Input::Update()
 {
-    prevKeyStates[activeKey] = keyStates[activeKey];
-    prevMouseButtons[activeMouseButton] = mouseButtons[activeMouseButton];
+    for(const auto& activeKey:activeKeys)
+        prevKeyStates[activeKey] = keyStates[activeKey];
+    activeKeys.clear();
+    for(const auto& activeMouseButton: activeMouseButtons)
+        prevMouseButtons[activeMouseButton] = mouseButtons[activeMouseButton];
+    activeMouseButtons.clear();
 }
 
 bool Input::GetKeyDown(const unsigned char& key)

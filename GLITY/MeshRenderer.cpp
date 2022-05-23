@@ -4,6 +4,7 @@
 class GameObject;
 
 std::map<std::string, GLuint> MeshRenderer::PathToProgramDict;
+std::vector<MeshRenderer> MeshRenderer::renderers;
 
 MeshRenderer::MeshRenderer(GameObject& obj, Mesh* const mesh, GLuint shaderProgram) :Component(obj), _mesh(mesh), shaderProgram(shaderProgram)
 {

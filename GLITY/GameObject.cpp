@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "TransformMgr.h"
 
+std::vector<GameObject> GameObject::gameObjects;
+
 GameObject::GameObject()
 {
 	_transformId = TransformMgr::GenerateTransform();

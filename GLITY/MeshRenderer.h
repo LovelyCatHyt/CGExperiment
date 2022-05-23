@@ -9,6 +9,8 @@ private:
 	Mesh* const _mesh;
 	static std::map<std::string, GLuint> PathToProgramDict;
 public:
+    static std::vector<MeshRenderer> renderers;
+
     GLuint shaderProgram;
 
 	MeshRenderer() = delete;

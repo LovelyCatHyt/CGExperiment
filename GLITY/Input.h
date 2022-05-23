@@ -1,6 +1,7 @@
 #pragma once
 #include "pch.h"
 #include "Glity-All.h"
+#include <vector>
 
 class GlityEntry;
 
@@ -16,11 +17,11 @@ class Input
 
     static bool keyStates[256];
     static bool prevKeyStates[256];
-    static unsigned char activeKey;
+    static std::vector<unsigned char> activeKeys;
 
     static bool mouseButtons[3];
     static bool prevMouseButtons[3];
-    static unsigned char activeMouseButton;
+    static std::vector<unsigned char> activeMouseButtons;
 public:
     static int mousePosition[2];
 

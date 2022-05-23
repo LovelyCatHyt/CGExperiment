@@ -57,6 +57,9 @@
     <ClInclude Include="Input.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Time.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GLITY.cpp">
@@ -93,6 +96,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Input.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Time.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

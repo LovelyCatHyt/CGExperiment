@@ -12,12 +12,14 @@ private:
 	MeshRenderer* _renderer;
 	std::vector<std::function<void(GameObject&)>> _updateCallBacks;
 public:
+    static std::vector<GameObject> gameObjects;
+
 	GameObject();
 	[[nodiscard]] Transform& GetTransform() const;
 	void RegisterRenderer(MeshRenderer& renderer);
 	[[nodiscard]] MeshRenderer& Renderer() const;
 	/// <summary>
-	/// ¸üĞÂ GameObject, ĞèÒªÃ¿Ö¡µ÷ÓÃÒ»´Î
+	/// æ›´æ–° GameObject, éœ€è¦æ¯å¸§è°ƒç”¨ä¸€æ¬¡
 	/// </summary>
 	void Update();
 	void AddUpdateListener(const std::function<void(GameObject&)>& callback);

@@ -5,11 +5,11 @@ class Time
 public:
 	static long long programStartTime_Ms;
 	/// <summary>
-	/// ÓëÉÏÒ»Ö¡Ïà¸ôµÄÊ±¼ä, °´Ãë¼ÆËã
+	/// ä¸ä¸Šä¸€å¸§ç›¸éš”çš„æ—¶é—´, æŒ‰ç§’è®¡ç®—
 	/// </summary>
 	static float deltaTime;
 	/// <summary>
-	/// ÔËĞĞ×ÜÊ±¼ä
+	/// è¿è¡Œæ€»æ—¶é—´
 	/// </summary>
 	static float time;
 	static void UpdateTime();

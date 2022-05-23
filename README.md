@@ -40,7 +40,20 @@
 - [x] 逐 GameObejct 的更新回调
 - [ ] 完全控制 GameLoop
   - [ ] FixedUpdate 与 Update 分离
-  - [ ] 扫描输入, 为 Input.Getxxx 做准备
+  - [x] 扫描输入, 为 Input.Getxxx 做准备
+- [x] Input
+  - [x] GetKeyDown, GetKey, GetKeyUp
+  - [x] GetMouseButtonDown, GetMouseButton, GetMouseButtonUp
+  - [x] mouePosition
+- [ ] Screen
+  - [ ] int Size[2]
+- [ ] Camera
+  - [ ] size
+  - [ ] aspect = width/height
+  - [ ] 可选的正交 or 透视模式
+  - [ ] 根据屏幕大小构建矩阵, 保证投影在屏幕上的物体的比例正确
+  - [ ] 投影矩阵
+  - [ ] 天空盒(整个 Unity 的天空盒就非常对味了)
 - [ ] Physics
   - [ ] 质点运动学
   - [ ] 碰撞检测
