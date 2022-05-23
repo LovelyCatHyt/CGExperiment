@@ -1,6 +1,6 @@
 #pragma once
 #include "../GLITY/Glity-All.h"
-class SquareDriver: public virtual Component, public virtual IUpdate
+class SquareDriver: public virtual Component, public virtual IUpdate, public virtual IAwake
 {
 private:
 	float _timer;
@@ -10,8 +10,8 @@ public:
 	float maxScale;
 	float minScale;
 	SquareDriver(float loop, float maxScale, float minScale);
-	void Update(GameObject& obj);
-    void Awake(GameObject& obj);
+	void Update(GameObject& obj) override;
+    void Awake(GameObject& obj) override;
     std::string Name() override;
 };
 

@@ -4,6 +4,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="SquareDriver.cpp" />
+    <ClCompile Include="TriangleDriver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -12,6 +13,7 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="SquareDriver.h" />
+    <ClInclude Include="TriangleDriver.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\ChessBoard.frag">

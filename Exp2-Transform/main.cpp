@@ -2,11 +2,13 @@
 
 #include "../GLITY/Glity-All.h"
 #include "SquareDriver.h"
+#include "TriangleDriver.h"
 
 SquareDriver square{ 2, 0.8f, .333333f };
+TriangleDriver triangle{};
 
 void init() {
-    GlityEntry::Init();
+    
     // Meshes------------------------------------------------------------------------------
     // 三角形
     auto& triangle = Mesh::GenMesh();
@@ -29,10 +31,10 @@ void init() {
     GameObject::gameObjects = { GameObject{}, GameObject{} };
     // 位置
     auto& tran1 = GameObject::gameObjects[0].GetTransform();
-    tran1.SetPosition({ 0, -0.5, 0 });
+    tran1.SetPosition({ 0, 0.5, 0 });
     tran1.SetRotation({ 0, 0, 90 });
     auto& tran2 = GameObject::gameObjects[1].GetTransform();
-    tran2.SetPosition({ 0, 0.5, 0 });
+    tran2.SetPosition({ 0, -0.5, 0 });
     tran2.SetScale({ .5, .5, 1 });
     // MeshRenderers-----------------------------------------------------------------------
     MeshRenderer::renderers.emplace_back(&triangle, "Shaders/ColorCircle");
@@ -43,10 +45,9 @@ void init() {
 
 void bindEvents()
 {
-    // GameObject::gameObjects[1].AddUpdateListener([&](GameObject& o) { square.Update(o); });
+    GameObject::gameObjects[0].AddComponent(triangle);
     GameObject::gameObjects[1].AddComponent(square);
-    // std::cout<<GameObject::gameObjects[1].GetComponent<SquareDriver>().Name();
-    square.Awake(GameObject::gameObjects[1]);
+    // square.Awake(GameObject::gameObjects[1]);
 }
 
 int main(int argc, char* argv[])
@@ -71,6 +72,7 @@ int main(int argc, char* argv[])
     // 初始化
     init();
     bindEvents();
+    GlityEntry::Init();
     // glutKeyboardFunc(keyfunc); 输入回调只能有一个
     // glutDisplayFunc(display); 渲染回调显然也只能有一个
 
