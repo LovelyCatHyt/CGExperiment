@@ -12,5 +12,7 @@ class Screen
     static void WindowResize(int width, int height);
 public:
     static vmath::vec2 pixelSize;
+    static int screenSize[2]; 
+    static vmath::vec2 ScreenToNdc(int x, int y);
 };
 
