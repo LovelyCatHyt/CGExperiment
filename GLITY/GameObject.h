@@ -1,7 +1,9 @@
 #pragma once
 #include "pch.h"
+#include "Glity-All.h"
+#include "GlityEntry.h"
 #include <vector>
-#include <functional>
+
 
 class IUpdate;
 class Component;
@@ -14,8 +16,16 @@ private:
 	MeshRenderer* _renderer;
     std::vector<Component*> _components;
     std::vector<IUpdate*> _updatables;
+    friend GlityEntry;
     friend Transform::Transform(::GameObject& obj);
     friend Transform::Transform(Transform&& other) noexcept;
+
+    void Awake();
+    /// <summary>
+    /// 更新 GameObject, 需要每帧调用一次
+    /// </summary>
+    void Update();
+
 public:
     static std::vector<GameObject> gameObjects;
 
@@ -23,10 +33,6 @@ public:
 	[[nodiscard]] Transform& GetTransform() const;
 	void RegisterRenderer(MeshRenderer& renderer);
 	[[nodiscard]] MeshRenderer& Renderer() const;
-	/// <summary>
-	/// 更新 GameObject, 需要每帧调用一次
-	/// </summary>
-	void Update();
     /// <summary>
     /// 添加用于监听 GameObject 事件的 Component
     /// </summary>

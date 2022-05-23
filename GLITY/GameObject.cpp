@@ -24,6 +24,24 @@ MeshRenderer& GameObject::Renderer() const
 	return *_renderer;
 }
 
+void GameObject::Awake()
+{
+    // 绑定所有监听项目
+    for (Component* component : _components)
+    {
+        auto* updatablePtr = dynamic_cast<IUpdate*>(component);
+        if (updatablePtr)
+        {
+            _updatables.emplace_back(updatablePtr);
+        }
+        auto* awakablePtr = dynamic_cast<IAwake*>(component);
+        if (awakablePtr)
+        {
+            awakablePtr->Awake(*this);
+        }
+    }
+}
+
 void GameObject::Update()
 {
     for(auto* updatable: _updatables)
@@ -34,10 +52,5 @@ void GameObject::Update()
 
 void GameObject::AddComponent(Component& component)
 {
-    auto* updatablePtr = dynamic_cast<IUpdate*>(&component);
-    if(updatablePtr)
-    {
-        _updatables.emplace_back(updatablePtr);
-    }
     _components.emplace_back(&component);
 }

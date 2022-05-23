@@ -4,6 +4,11 @@
 void GlityEntry::Init()
 {
     Input::Init();
+    Screen::Init();
+    for (auto& gameObject : GameObject::gameObjects)
+    {
+        gameObject.Awake();
+    }
     glutDisplayFunc(DisplayLoop);
 }
 
@@ -27,11 +32,7 @@ void GlityEntry::DisplayLoop()
     {
         renderer.Display();
     }
-
-    if (Input::GetMouseButtonDown(GLUT_LEFT_BUTTON))
-    {
-        std::cout << "mouse down at " << Input::mousePosition[0] << ", " << Input::mousePosition[1] << std::endl;
-    }
+    
     glFlush();
     glutPostRedisplay();
     Input::Update();

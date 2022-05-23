@@ -162,12 +162,14 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Glity-All.h" />
     <ClInclude Include="GlityEntry.h" />
+    <ClInclude Include="IAwake.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="IUpdate.h" />
     <ClInclude Include="LoadShaders.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshRenderer.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Screen.h" />
     <ClInclude Include="ShaderUtil.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Transform.h" />
@@ -179,6 +181,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GLITY.cpp" />
     <ClCompile Include="GlityEntry.cpp" />
+    <ClCompile Include="IAwake.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="LoadShaders.cpp" />
     <ClCompile Include="Mesh.cpp" />
@@ -189,6 +192,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Screen.cpp" />
     <ClCompile Include="ShaderUtil.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="Transform.cpp" />
