@@ -43,6 +43,7 @@ void MeshRenderer::BindGameObject(GameObject* objPtr)
 
 void MeshRenderer::Display() const
 {
+    if(!enabled) return;
 	glUseProgram(shaderProgram);
 	glBindVertexArray(_mesh->vaoId);
 	// const auto& vertices = _mesh->vertices;

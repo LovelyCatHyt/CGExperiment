@@ -37,6 +37,7 @@ void GameObject::Awake()
         auto* awakablePtr = dynamic_cast<IAwake*>(component);
         if (awakablePtr)
         {
+            // 默认无论如何都要 Awake, 其它细节先不管
             awakablePtr->Awake(*this);
         }
     }
@@ -46,7 +47,8 @@ void GameObject::Update()
 {
     for(auto* updatable: _updatables)
     {
-        updatable->Update(*this);
+        if(updatable->enabled)
+            updatable->Update(*this);
     }
 }
 

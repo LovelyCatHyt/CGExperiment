@@ -10,6 +10,7 @@ class Component
 protected:
 	GameObject* _gameObject;
 public:
+    bool enabled = true;
     virtual ~Component() = default;
     explicit Component(GameObject& obj); // 以引用初始化
 	explicit Component(GameObject* objPtr); // 以指针初始化

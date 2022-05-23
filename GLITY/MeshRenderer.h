@@ -11,7 +11,6 @@ public:
     static std::vector<MeshRenderer> renderers;
 
     GLuint shaderProgram;
-
 	MeshRenderer() = delete;
 	MeshRenderer(GameObject& obj, Mesh* mesh, GLuint shaderProgram);
 	MeshRenderer(Mesh* mesh, const char* shaderPathNoExtension);
