@@ -12,13 +12,9 @@ CubeDriver::CubeDriver(float loop, float maxScale, float minScale) :
 
 void CubeDriver::Update(GameObject& obj)
 {
-    glEnable(GL_CULL_FACE);
-    glCullFace(GL_BACK);
-    glEnable(GL_DEPTH_TEST);
-    // glDepthFunc(GL_LESS);
     auto& r = obj.Renderer();
     if(Input::GetKeyDown('t')) r.enabled = !r.enabled;
-    obj.GetTransform().SetRotation({0, Time::time * 90, 0});
+    obj.GetTransform().SetRotation({0, -Time::time * 90, 0});
 }
 
 void CubeDriver::Awake(GameObject& obj)

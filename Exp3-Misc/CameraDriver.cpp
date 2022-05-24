@@ -17,7 +17,7 @@ void CameraDriver::Update(GameObject& obj)
     // 位移
     float dz = 0;
     float dx = 0;
-    const float speed = 1.5f;
+    const float speed = 4.0f;
     if (Input::GetKey('a')) dx -= speed * Time::deltaTime;
     if (Input::GetKey('d')) dx += speed * Time::deltaTime;
     if (Input::GetKey('w')) dz += speed * Time::deltaTime;
@@ -66,5 +66,13 @@ void CameraDriver::Update(GameObject& obj)
         (*Camera::main).isOrthoMode = !(*Camera::main).isOrthoMode;
     }
 
+    // 切换背面裁剪
+    if(Input::GetKeyDown('b'))
+    {
+        MeshRenderer::cullFace = !MeshRenderer::cullFace;
+        MeshRenderer::depthTest = !MeshRenderer::depthTest;
+    }
+
+    
 }
 
