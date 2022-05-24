@@ -16,7 +16,7 @@ void init() {
     // Meshes------------------------------------------------------------------------------
     // 四面体
     auto& triangleMesh = Mesh::GenMesh();
-    triangleMesh.indices = { 0, 2, 1, 3, 0, 2};
+    triangleMesh.indices = { 0, 2, 1, 3, 0, 2 };
     triangleMesh.vertices = {
         {.0f,       .0f,        -1.0f},
         {-.866f,    .0f,        .5f},
@@ -70,7 +70,7 @@ void init() {
     // TODO: delete camera...?
     cameraObj.AddComponent(*new Camera(cameraObj));
     auto& camTran = cameraObj.GetTransform();
-    camTran.SetPosition(vmath::vec3{ 0, 3, -1});
+    camTran.SetPosition(vmath::vec3{ 0, 3, -1 });
     camTran.SetRotation(vmath::vec3{ 45, 0, 0 });
     cameraObj.AddComponent(*new CameraDriver(cameraObj));
     // MeshRenderer::renderers[0].BindGameObject(*triangleObj);

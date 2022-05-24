@@ -118,20 +118,17 @@ vmath::Tmat4<float> Transform::WorldToLocalMat4X4()
 
 vmath::vec3 Transform::Right() const
 {
-    vmath::vec4 temp = _mat * vmath::vec4{ 1, 0, 0, 0 };
-    return vmath::vec3{temp[0], temp[1], temp[2]};
+    return vmath::vec3{ _mat * vmath::vec4{ 1, 0, 0, 0 } };
 }
 
 vmath::vec3 Transform::Forward() const
 {
-    vmath::vec4 temp = _mat * vmath::vec4{ 0, 0, 1, 0 };
-    return vmath::vec3{ temp[0], temp[1], temp[2] };
+    return vmath::vec3{ _mat * vmath::vec4{ 0, 0, 1, 0 } };
 }
 
 vmath::vec3 Transform::Up() const
 {
-    vmath::vec4 temp = _mat * vmath::vec4{ 0, 1, 0, 0 };
-    return vmath::vec3{ temp[0], temp[1], temp[2] };
+    return vmath::vec3{ _mat * vmath::vec4{ 0, 1, 0, 0 } };
 }
 
 void Transform::ConstructMat()

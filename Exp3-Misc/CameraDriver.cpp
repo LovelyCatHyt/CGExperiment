@@ -33,7 +33,7 @@ void CameraDriver::Update(GameObject& obj)
     pos += dx * tran.Right() + dz * tran.Forward();
     tran.SetPosition(pos);
 
-    // 旋转
+    // 鼠标旋转
     if(Input::GetMouseButtonDown(0) || Input::GetMouseButtonDown(2))
     {
         mouseX = Input::mousePosition[0];
@@ -54,6 +54,7 @@ void CameraDriver::Update(GameObject& obj)
 
         euler[0] += mouseDy * rotateDelta;
         euler[1] += mouseDx * rotateDelta;
+        // TODO: fix this WRONG usage
         // euler = Quaternion::Euler(0, 1, 0) * euler;
 
         tran.SetRotation(euler);

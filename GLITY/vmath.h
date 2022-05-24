@@ -578,7 +578,8 @@ namespace vmath
             temp[row] = 0;
             for (int col = 0; col < w; col++)
             {
-                temp[row] += mat[row][col] * that[col];
+                // trust me: this IS correct, not mat[row][col], because all matrices in this file are transposed.
+                temp[row] += mat[col][row] * that[col];
             }
         }
         return temp;
