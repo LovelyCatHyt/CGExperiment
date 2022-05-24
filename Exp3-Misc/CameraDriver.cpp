@@ -3,7 +3,7 @@
 #include "../GLITY/Quaternion.h"
 
 CameraDriver::CameraDriver(GameObject& obj) : Component(&obj), IUpdate(),
-    mouseX(0), mouseY(0)
+mouseX(0), mouseY(0)
 {
 }
 
@@ -34,35 +34,32 @@ void CameraDriver::Update(GameObject& obj)
     tran.SetPosition(pos);
 
     // 鼠标旋转
-    if(Input::GetMouseButtonDown(0) || Input::GetMouseButtonDown(2))
+    if (Input::GetMouseButtonDown(0) || Input::GetMouseButtonDown(2))
     {
         mouseX = Input::mousePosition[0];
         mouseY = Input::mousePosition[1];
     }
-    else if(Input::GetMouseButton(0) || Input::GetMouseButton(2))
+    else if (Input::GetMouseButton(0) || Input::GetMouseButton(2))
     {
         const auto rotateDelta = 60.0f * Time::deltaTime;
 
         const auto mouseDx = Input::mousePosition[0] - mouseX;
         const auto mouseDy = Input::mousePosition[1] - mouseY;
-        if(mouseDx!=0 || mouseDy!=0)
+        if (mouseDx != 0 || mouseDy != 0)
         {
             // std::cout<<"dx: "<<mouseDx<<", dy: "<<mouseDy<<std::endl;
         }
 
-        auto euler = tran.GetRotation();
-
-        euler[0] += mouseDy * rotateDelta;
-        euler[1] += mouseDx * rotateDelta;
+        auto rot = tran.GetRotation();
         // TODO: fix this WRONG usage
         // euler = Quaternion::Euler(0, 1, 0) * euler;
-
-        tran.SetRotation(euler);
+        rot = Quaternion::Euler(0, mouseDx * rotateDelta, 0) * rot * Quaternion::Euler(mouseDy * rotateDelta, 0, 0);
+        tran.SetRotation(rot);
 
         mouseX += mouseDx;
         mouseY += mouseDy;
     }
 
-    
+
 }
 

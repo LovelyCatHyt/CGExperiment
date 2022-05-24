@@ -61,7 +61,7 @@ vmath::mat4 MatFromEuler2(vmath::vec3 euler)
 Transform::Transform(vmath::vec3 pos, vmath::vec3 rot, vmath::vec3 scale) :
     Component(nullptr),
     _position(std::move(pos)),
-    _euler(std::move(rot)),
+    _rotation(Quaternion::Euler(rot[0], rot[1], rot[2])),
     _scale(std::move(scale))
 
 {
@@ -76,7 +76,7 @@ Transform::Transform(::GameObject& obj) : Component(&obj)
 Transform::Transform() :
     Component(nullptr),
     _position(0, 0, 0),
-    _euler(0, 0, 0),
+    _rotation(Quaternion::Euler(0, 0, 0)),
     _scale(1, 1, 1)
 {
     ConstructMat();
@@ -85,7 +85,7 @@ Transform::Transform() :
 Transform::Transform(Transform&& other) noexcept :
     Component(other._gameObject),
     _position(std::move(other._position)),
-    _euler(std::move(other._euler)),
+    _rotation(std::move(other._rotation)),
     _scale(std::move(other._scale)),
     _mat(other._mat)
 {
@@ -112,7 +112,7 @@ vmath::Tmat4<float> Transform::WorldToLocalMat4X4()
 {
     // 和 Construct 反着写就行了
     return vmath::scale(1.0f / _scale[0], 1.0f / _scale[1], 1.0f / _scale[2]) *
-           MatFromEuler2(-1.0f * _euler) *
+        Quaternion::ToMatrix(Quaternion::Inverse(_rotation)) *
            vmath::translate(-_position[0], -_position[1], -_position[2]);
 }
 
@@ -133,7 +133,7 @@ vmath::vec3 Transform::Up() const
 
 void Transform::ConstructMat()
 {
-    _mat = translate(_position) * MatFromEuler(_euler) * vmath::scale(_scale[0], _scale[1], _scale[2]);
+    _mat = translate(_position) * Quaternion::ToMatrix(_rotation) * vmath::scale(_scale[0], _scale[1], _scale[2]);
 }
 
 vmath::vec3 Transform::GetPosition() const
@@ -147,14 +147,25 @@ void Transform::SetPosition(const vmath::vec3 & pos)
     ConstructMat();
 }
 
-vmath::vec3 Transform::GetRotation() const
+Quaternion Transform::GetRotation() const
 {
-    return _euler;
+    return _rotation;
 }
+
+//vmath::vec3 Transform::GetEulerRotation() const
+//{
+//    return _euler;
+//}
 
 void Transform::SetRotation(const vmath::vec3 & rot)
 {
-    _euler = rot;
+    _rotation = Quaternion::Euler(rot[0], rot[1], rot[2]);
+    ConstructMat();
+}
+
+void Transform::SetRotation(const Quaternion& rotation)
+{
+    _rotation = rotation;
     ConstructMat();
 }
 
