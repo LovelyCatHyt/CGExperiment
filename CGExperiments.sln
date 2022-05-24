@@ -22,6 +22,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Exp2-Transform", "Exp2-Tran
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GLITY", "GLITY\GLITY.vcxproj", "{5A30C0EE-4056-44E2-8E01-93D9B70DAFE9}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Exp3-Misc", "Exp3-Misc\Exp3-Misc.vcxproj", "{45734CAB-DEA3-4F90-BDDD-3BD68B208A11}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5A30C0EE-4056-44E2-8E01-93D9B70DAFE9} = {5A30C0EE-4056-44E2-8E01-93D9B70DAFE9}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -70,6 +75,14 @@ Global
 		{5A30C0EE-4056-44E2-8E01-93D9B70DAFE9}.Release|x64.Build.0 = Release|x64
 		{5A30C0EE-4056-44E2-8E01-93D9B70DAFE9}.Release|x86.ActiveCfg = Release|Win32
 		{5A30C0EE-4056-44E2-8E01-93D9B70DAFE9}.Release|x86.Build.0 = Release|Win32
+		{45734CAB-DEA3-4F90-BDDD-3BD68B208A11}.Debug|x64.ActiveCfg = Debug|x64
+		{45734CAB-DEA3-4F90-BDDD-3BD68B208A11}.Debug|x64.Build.0 = Debug|x64
+		{45734CAB-DEA3-4F90-BDDD-3BD68B208A11}.Debug|x86.ActiveCfg = Debug|Win32
+		{45734CAB-DEA3-4F90-BDDD-3BD68B208A11}.Debug|x86.Build.0 = Debug|Win32
+		{45734CAB-DEA3-4F90-BDDD-3BD68B208A11}.Release|x64.ActiveCfg = Release|x64
+		{45734CAB-DEA3-4F90-BDDD-3BD68B208A11}.Release|x64.Build.0 = Release|x64
+		{45734CAB-DEA3-4F90-BDDD-3BD68B208A11}.Release|x86.ActiveCfg = Release|Win32
+		{45734CAB-DEA3-4F90-BDDD-3BD68B208A11}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

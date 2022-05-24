@@ -19,10 +19,10 @@ void GlityEntry::LateUpdate()
 
 void GlityEntry::DisplayLoop()
 {
-    // 清屏 (屏幕缓冲区? 绘制缓冲区?)
+    // 清除颜色缓冲, 深度缓冲
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    // 清屏
     glClearColor(0, 0, 0, 1);
-    // Clear again
-    glClear(GL_COLOR_BUFFER_BIT);
 
     for (auto& gameObject : GameObject::gameObjects)
     {

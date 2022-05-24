@@ -9,7 +9,7 @@ private:
 	static std::vector<Mesh*> Meshes;
 public:
 	std::vector<vmath::vec3> vertices;
-	std::vector<unsigned int> indices;
+	std::vector<int> indices;
 	// GLuint vboId;
 	GLuint vaoId;
 	GLenum drawType;

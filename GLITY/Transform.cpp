@@ -48,6 +48,16 @@ vmath::mat4 MatFromEuler(vmath::vec3 euler)
         RotateY(euler[1]);
 }
 
+vmath::mat4 MatFromEuler2(vmath::vec3 euler)
+{
+    // Ry * Rx * Rz
+    return
+        RotateY(euler[1]) *
+        RotateX(euler[0]) *
+        RotateZ(euler[2]);
+}
+
+
 Transform::Transform(vmath::vec3 pos, vmath::vec3 rot, vmath::vec3 scale) :
     Component(nullptr),
     _position(std::move(pos)),
@@ -102,8 +112,26 @@ vmath::Tmat4<float> Transform::WorldToLocalMat4X4()
 {
     // 和 Construct 反着写就行了
     return vmath::scale(1.0f / _scale[0], 1.0f / _scale[1], 1.0f / _scale[2]) *
-           MatFromEuler(-1.0f * _euler) *
+           MatFromEuler2(-1.0f * _euler) *
            vmath::translate(-_position[0], -_position[1], -_position[2]);
+}
+
+vmath::vec3 Transform::Right() const
+{
+    vmath::vec4 temp = _mat * vmath::vec4{ 1, 0, 0, 0 };
+    return vmath::vec3{temp[0], temp[1], temp[2]};
+}
+
+vmath::vec3 Transform::Forward() const
+{
+    vmath::vec4 temp = _mat * vmath::vec4{ 0, 0, 1, 0 };
+    return vmath::vec3{ temp[0], temp[1], temp[2] };
+}
+
+vmath::vec3 Transform::Up() const
+{
+    vmath::vec4 temp = _mat * vmath::vec4{ 0, 1, 0, 0 };
+    return vmath::vec3{ temp[0], temp[1], temp[2] };
 }
 
 void Transform::ConstructMat()

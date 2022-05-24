@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="CameraDriver.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="TriangleDriver.cpp" />
+    <ClCompile Include="CubeDriver.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Shared\vmath.h" />
+    <ClInclude Include="CameraDriver.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="TriangleDriver.h" />
+    <ClInclude Include="CubeDriver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\ChessBoard.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\ColorCircle.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\Standard.vert">
+      <Filter>Shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{4ade8984-14c4-4586-971b-85d75309e4fa}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

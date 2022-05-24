@@ -26,6 +26,21 @@ public:
 
     [[nodiscard]] vmath::mat4 LocalToWorldMat4X4() const;
 	[[nodiscard]] vmath::Tmat4<float> WorldToLocalMat4X4();
+    /// <summary>
+    /// 返回 Transform 内, 向量(1, 0, 0)在世界空间下的表示
+    /// </summary>
+    /// <returns></returns>
+    vmath::vec3 Right() const;
+    /// <summary>
+    /// 返回 Transform 内, 向量(0, 0, 1)在世界空间下的表示
+    /// </summary>
+    /// <returns></returns>
+    vmath::vec3 Forward() const;
+    /// <summary>
+    /// 返回 Transform 内, 向量(0, 1, 0)在世界空间下的表示
+    /// </summary>
+    /// <returns></returns>
+    vmath::vec3 Up() const;
     [[nodiscard]] vmath::vec3 GetPosition() const;
 	void SetPosition(const vmath::vec3& pos);
     [[nodiscard]] vmath::vec3 GetRotation() const;

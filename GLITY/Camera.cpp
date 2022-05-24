@@ -24,7 +24,7 @@ std::string Camera::Name()
 
 void Camera::LateUpdate(GameObject& obj)
 {
-    aspect = static_cast<float>(Screen::screenSize[1]) / static_cast<float>(Screen::screenSize[0]);
+    aspect = static_cast<float>(Screen::screenSize[0]) / static_cast<float>(Screen::screenSize[1]);
     
     if (isOrthoMode)
     {
@@ -48,7 +48,7 @@ void Camera::LateUpdate(GameObject& obj)
         {
             vmath::vec4{q / aspect, 0, 0, 0},
             vmath::vec4{0, q, 0, 0},
-            vmath::vec4{0, 0, (nearPlane + farPlane) / (nearPlane - farPlane), -1},
+            vmath::vec4{0, 0, (nearPlane + farPlane) / (farPlane - nearPlane), 1},
             vmath::vec4{0, 0, (2 * nearPlane * farPlane) / (nearPlane - farPlane), 0}
         };
     }

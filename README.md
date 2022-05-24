@@ -40,19 +40,20 @@
   - [x] 旋转
   - [x] 缩放
   - [x] 变换矩阵
-  - [ ] 逆变换矩阵
+  - [x] 逆变换矩阵
   - [ ] 嵌套结构
 - [ ] Mesh 记录网格信息
   - [ ] 顶点数据
     - [x] 坐标
-    - [ ] 颜色
+    - [ ] 纹理坐标
     - [ ] 法线
-  - [x] 三角形数据
+  - [x] 三角形索引
 - [x] MeshRenderer 渲染物体
 - [x] 逐 GameObejct 的更新回调
-- [ ] AddComponent
-  - [ ] 主要是添加 Update, LateUpadte, Awake, 之类的东西
-  - [ ] 使用 IUpdate 等抽象类来判断是否需要注册相应的监听事件
+  - [x] AddComponent
+    - [x] 主要是添加 Update, LateUpadte, Awake, 之类的东西
+    - [x] 使用 IUpdate 等抽象类来判断是否需要注册相应的监听事件
+  - [x] GetComponent\<T\>: 获取 T 类型的组件. 底层原理是 `dynamic_cast<T*>`
 - [ ] 完全控制 GameLoop
   - [ ] FixedUpdate 与 Update 分离
   - [x] 扫描输入, 为 Input.Getxxx 做准备
@@ -61,13 +62,15 @@
   - [x] GetMouseButtonDown, GetMouseButton, GetMouseButtonUp
   - [x] mouePosition
 - [ ] Screen
-  - [ ] int Size[2]
+  - [x] vec2 pixelSize
+  - [x] int screenSize[2]
+  - [x] ScreenToNdc(): 屏幕空间到 NDC 空间
 - [ ] Camera
   - [ ] size
   - [ ] aspect = width/height
   - [ ] 可选的正交 or 透视模式
   - [ ] 根据屏幕大小构建矩阵, 保证投影在屏幕上的物体的比例正确
-  - [ ] 投影矩阵
+  - [x] 投影矩阵
   - [ ] 天空盒(整个 Unity 的天空盒就非常对味了)
 - [ ] Physics
   - [ ] 质点运动学
