@@ -12,7 +12,7 @@ CubeDriver::CubeDriver(float loop, float maxScale, float minScale) :
 
 void CubeDriver::Update(GameObject& obj)
 {
-    glFrontFace(GL_FRONT);
+    glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
     glEnable(GL_DEPTH_TEST);
     // glDepthFunc(GL_LESS);

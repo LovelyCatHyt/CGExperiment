@@ -1,6 +1,7 @@
 #version 430 core
 in vec4 color;
 in vec3 modelPosition;
+in vec4 ndcPosition;
 out vec4 fColor;
 
 layout(location = 0) uniform mat4 projectMat;
@@ -19,6 +20,8 @@ float get_chessBoard(vec2 pos, float scale)
 	return step(fract(white/2),0);
 }
 
+mat4 combinedMat = projectMat * modelMat;
+
 void main()
 {
 	vec2 pos = modelPosition.xy;
@@ -34,5 +37,10 @@ void main()
 		vec2 mutatedPos = normalize(modelPosition.xy) * (dist * dist);
 		fColor = black + vec4(modelPosition,1) * get_chessBoard(mutatedPos, 8);
 	}
+
+    vec4 ndcPos = combinedMat * vec4(modelPosition, 1);
+    ndcPos = ndcPos / ndcPos.w;
+
+    if(ndcPos.z < 0) discard;
 }
 

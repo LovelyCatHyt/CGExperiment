@@ -16,7 +16,7 @@ void init() {
     // Meshes------------------------------------------------------------------------------
     // 四面体
     auto& triangleMesh = Mesh::GenMesh();
-    triangleMesh.indices = { 0, 2, 1, 3, 0, 2 };
+    triangleMesh.indices = { 0, 3, 1, 2, 0, 3};
     triangleMesh.vertices = {
         {.0f,       .0f,        -1.0f},
         {-.866f,    .0f,        .5f},
@@ -29,7 +29,7 @@ void init() {
     glEnable(GL_PRIMITIVE_RESTART);
     glPrimitiveRestartIndex(0xFFFF);
     cubeMesh
-        .indices = { 0, 1, 2, 3, 7, 4, 5, 1, 0xFFFF, 6, 7, 4, 5, 1, 2, 3, 7 };
+        .indices = { 0, 1, 5, 4, 7, 3, 2, 1, 0xFFFF, 6, 7, 4, 5, 1, 2, 3, 7};
     cubeMesh
         .vertices = std::vector<vmath::vec3>{
                 {-.5f,  -.5f,   -.5f },
@@ -47,11 +47,12 @@ void init() {
 
     // 位置
     auto& tran1 = GameObject::gameObjects.emplace_back().GetTransform();
-    tran1.SetPosition({ 0, 0, 0 });
+    tran1.SetPosition({ -1, 0, 0 });
     tran1.SetRotation({ 0, 0, 0 });
+    tran1.SetScale({0.5, 0.5, 0.5f});
     tran1.AddComponent(triangle);
     auto& tran2 = GameObject::gameObjects.emplace_back().GetTransform();
-    tran2.SetPosition({ 0, -0.5, 0 });
+    tran2.SetPosition({ 1, 0, 0 });
     tran2.SetScale({ .5f, .5f, .5f });
     tran2.AddComponent(square);
     // MeshRenderers-----------------------------------------------------------------------
@@ -70,7 +71,7 @@ void init() {
     // TODO: delete camera...?
     cameraObj.AddComponent(*new Camera(cameraObj));
     auto& camTran = cameraObj.GetTransform();
-    camTran.SetPosition(vmath::vec3{ 0, 3, -1 });
+    camTran.SetPosition(vmath::vec3{ 0, 0.5f, -1 });
     camTran.SetRotation(vmath::vec3{ 45, 0, 0 });
     cameraObj.AddComponent(*new CameraDriver(cameraObj));
     // MeshRenderer::renderers[0].BindGameObject(*triangleObj);

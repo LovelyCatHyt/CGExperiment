@@ -1,6 +1,7 @@
 #version 430 core
 in vec4 color;
 in vec3 modelPosition;
+in vec4 ndcPosition;
 out vec4 fColor;
 
 layout(location = 0) uniform mat4 projectMat;
@@ -23,8 +24,15 @@ vec3 hsv2rgb(vec3 c)
     return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
 }
 
+mat4 combinedMat = projectMat * modelMat;
+
 void main()
 {
 	fColor = vec4(hsv2rgb(modelPosition * 0.5f  + 0.5f ),1);
+
+    vec4 ndcPos = combinedMat * vec4(modelPosition, 1);
+    ndcPos = ndcPos / ndcPos.w;
+
+    if(ndcPos.z < 0) discard;
 }
 
