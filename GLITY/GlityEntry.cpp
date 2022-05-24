@@ -9,6 +9,8 @@ void GlityEntry::Init()
     {
         gameObject.Awake();
     }
+    // 设置裁剪平面
+    glCullFace(GL_BACK);
     glutDisplayFunc(DisplayLoop);
 }
 
@@ -32,6 +34,17 @@ void GlityEntry::DisplayLoop()
     {
         gameObject.LateUpdate();
     }
+
+    if(MeshRenderer::depthTest)
+        glEnable(GL_DEPTH_TEST);
+    else
+        glDisable(GL_DEPTH_TEST);
+
+    if(MeshRenderer::cullFace)
+        glEnable(GL_CULL_FACE);
+    else
+        glDisable(GL_CULL_FACE);
+
     for (const auto& renderer : MeshRenderer::renderers)
     {
         renderer.Display();

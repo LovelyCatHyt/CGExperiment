@@ -14,6 +14,8 @@ public:
     static std::vector<MeshRenderer> renderers;
     static const GLint projectMatLoc = 0;
     static const GLint modelMatLoc = 1;
+    static bool depthTest;
+    static bool cullFace;
 
     GLuint shaderProgram;
 	MeshRenderer() = delete;

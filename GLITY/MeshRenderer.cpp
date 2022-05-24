@@ -5,7 +5,8 @@ class GameObject;
 
 std::map<std::string, GLuint> MeshRenderer::PathToProgramDict;
 std::vector<MeshRenderer> MeshRenderer::renderers;
-
+bool MeshRenderer::depthTest = true;
+bool MeshRenderer::cullFace = true;
 MeshRenderer::MeshRenderer(MeshRenderer&& other) noexcept :
     Component(other._gameObject),
     _mesh(other._mesh),
