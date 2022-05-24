@@ -60,7 +60,14 @@ MeshRenderer::MeshRenderer(GameObject& obj, Mesh* mesh, const char* vertShaderPa
 
 GLint MeshRenderer::GetUniformLoc(const char* uniformName) const
 {
-    return glGetUniformLocation(shaderProgram, uniformName);
+    auto temp = glGetUniformLocation(shaderProgram, uniformName);
+#ifdef _DEBUG
+    if(temp == -1)
+    {
+        std::cerr<<"Location of \""<<uniformName<<"\" in program "<< shaderProgram<<" not found!"<<std::endl;
+    }
+#endif
+    return temp;
 }
 
 void MeshRenderer::Display() const

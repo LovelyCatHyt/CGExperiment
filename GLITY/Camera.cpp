@@ -36,8 +36,8 @@ void Camera::LateUpdate(GameObject& obj)
         {
             vmath::vec4{2 / (r - l),        0,                  0,                                      0},
             vmath::vec4{0,                  2 / (t - b),        0,                                      0},
-            vmath::vec4{0,                  0,                  -1 / (farPlane - nearPlane),            0},
-            vmath::vec4{-(r + l) / (r - l), -(t + b) / (t - b), -nearPlane / (farPlane - nearPlane),    1}
+            vmath::vec4{0,                  0,                  1 / (farPlane - nearPlane),             0},
+            vmath::vec4{-(r + l) / (r - l), -(t + b) / (t - b), nearPlane / (farPlane - nearPlane),     1}
         };
     }
     else

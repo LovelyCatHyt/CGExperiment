@@ -60,6 +60,11 @@ void CameraDriver::Update(GameObject& obj)
         mouseY += mouseDy;
     }
 
+    // 切换模式
+    if(Input::GetKeyUp('p'))
+    {
+        (*Camera::main).isOrthoMode = !(*Camera::main).isOrthoMode;
+    }
 
 }
 
