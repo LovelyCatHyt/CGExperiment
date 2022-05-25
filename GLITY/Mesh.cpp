@@ -1,35 +1,86 @@
 #include "pch.h"
 #include "Mesh.h"
+#include "OBJ_Loader.h"
 
 std::vector<Mesh*> Mesh::Meshes{};
 
 Mesh& Mesh::GenMesh()
 {
-	Meshes.emplace_back(new Mesh());
-	return *Meshes[Meshes.size() - 1];
+    Meshes.emplace_back(new Mesh());
+    return *Meshes[Meshes.size() - 1];
+}
+
+Mesh& Mesh::LoadMesh(const std::string& path)
+{
+    objl::Loader loader{};
+    auto success = loader.LoadFile(path);
+    Mesh& m = GenMesh();
+
+    if (!success)
+    {
+#ifdef _DEBUG
+        std::cerr << "Obj file \"" << path << "\" load failed!";
+#endif
+        return m;
+    }
+    // ‰ªÖÂä†ËΩΩÁ¨¨‰∏Ä‰∏™ÁΩëÊ†º
+    auto& loadedMesh = loader.LoadedMeshes[0];
+    for(objl::Vertex v : loadedMesh.Vertices)
+    {
+        const auto& pos = v.Position;
+        const auto& normal = v.Normal;
+        const auto& textcoord = v.TextureCoordinate;
+        // ÂùêÊ†áÁ≥ªË≤å‰ººÂèç‰∫Ü, ‰øÆÊ≠£
+        m.vertices.emplace_back(pos.X, pos.Y, -pos.Z);
+        m.normals.emplace_back(normal.X, normal.Y, -normal.Z);
+        m.textcoords.emplace_back(textcoord.X, textcoord.Y, 0);
+    }
+
+    m.indices = loadedMesh.Indices;
+
+    return m;
 }
 
 void Mesh::Init()
 {
-	for (auto& meshPtr : Meshes)
-	{
-		auto& mesh = *meshPtr;
-		// …˙≥… VAO, VBO, EBO
-		glGenVertexArrays(1, &mesh.vaoId);
-		GLuint vboId;
-		glGenBuffers(1, &vboId);
-		GLuint eboId;
-		glGenBuffers(1, &eboId);
-		// ∞Û∂®µΩ∂•µ„ ˝◊È
-		glBindVertexArray(mesh.vaoId);
-		// ÃÓ≥‰∂•µ„◊¯±Í ˝æ›
-		glBindBuffer(GL_ARRAY_BUFFER, vboId);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vmath::vec3) * mesh.vertices.size(), mesh.vertices.cbegin()._Ptr, GL_STATIC_DRAW);
-		// ÃÓ≥‰À˜“˝ ˝◊È
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, eboId);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(int) * mesh.indices.size(), mesh.indices.cbegin()._Ptr, GL_STATIC_DRAW);
-		// …Ë÷√∂•µ„ Ù–‘÷∏’Î
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(vmath::vec3), 0); // ∂‘”¶∂•µ„◊≈…´∆˜÷–µƒ layout (location = 0) in vec3 aPos;
-		glEnableVertexAttribArray(0); // ∆Ù”√À˜“˝Œ™ 0 µƒ∂•µ„ Ù–‘, º¥◊¯±Í
-	}
+    for (auto& meshPtr : Meshes)
+    {
+        auto& mesh = *meshPtr;
+        // ÁîüÊàê VAO, VBO, EBO
+        glGenVertexArrays(1, &mesh.vaoId);
+        GLuint vboId;
+        glGenBuffers(1, &vboId);
+        GLuint eboId;
+        glGenBuffers(1, &eboId);
+        // ÁªëÂÆöÂà∞È°∂ÁÇπÊï∞ÁªÑ
+        glBindVertexArray(mesh.vaoId);
+        // ÁªëÂÆöÈ°∂ÁÇπÁºìÂ≠ò
+        glBindBuffer(GL_ARRAY_BUFFER, vboId);
+        //Â°´ÂÖÖÊï∞ÊçÆ
+        const GLsizeiptr verticesSize = sizeof(vmath::vec3) * mesh.vertices.size();
+        const GLsizeiptr normalsSize = sizeof(vmath::vec3) * mesh.normals.size();
+        const GLsizeiptr textcoordsSize = sizeof(vmath::vec3) * mesh.textcoords.size();
+        glBufferData(GL_ARRAY_BUFFER, verticesSize + normalsSize + textcoordsSize, nullptr, GL_STATIC_DRAW);
+        // È°∂ÁÇπÂùêÊ†áÊï∞
+        glBufferSubData(GL_ARRAY_BUFFER, 0, verticesSize, mesh.vertices.cbegin()._Ptr);
+        // Ê≥ïÁ∫ø
+        glBufferSubData(GL_ARRAY_BUFFER, verticesSize, normalsSize, mesh.normals.cbegin()._Ptr);
+        // Á∫πÁêÜÂùêÊ†á
+        glBufferSubData(GL_ARRAY_BUFFER, verticesSize + normalsSize, textcoordsSize, mesh.textcoords.cbegin()._Ptr);
+        // Â°´ÂÖÖÁ¥¢ÂºïÊï∞ÁªÑ
+        const GLsizeiptr indicesSize = sizeof(int) * mesh.indices.size();
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, eboId);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesSize, mesh.indices.cbegin()._Ptr, GL_STATIC_DRAW);
+        // ËÆæÁΩÆÈ°∂ÁÇπÂ±ûÊÄßÊåáÈíà
+        // layout (location = 0) in vec3 vPosition;
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(vmath::vec3), 0);
+        // layout (location = 1) in vec3 normal;
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(vmath::vec3), reinterpret_cast<const void*>(verticesSize));
+        // layout (location = 2) in vec3 textCoord;
+        glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(vmath::vec3), reinterpret_cast<const void*>(verticesSize + normalsSize));
+        // ÂêØÁî®È°∂ÁÇπÂ±ûÊÄß
+        glEnableVertexAttribArray(0);
+        glEnableVertexAttribArray(1);
+        glEnableVertexAttribArray(2);
+    }
 }

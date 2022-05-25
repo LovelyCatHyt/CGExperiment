@@ -47,7 +47,7 @@ void main()
 { 
 	gl_Position = rotateAround * vec4(vPosition, 1);
     gl_Position = projectMat * gl_Position;
-    gl_Position = gl_Position / gl_Position.w;
+    // gl_Position = gl_Position / gl_Position.w;
 	screenPosition = vPosition.xy;
 	color = vec4(1,0,0,1);
 }
