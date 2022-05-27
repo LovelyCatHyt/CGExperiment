@@ -82,7 +82,7 @@ void MeshRenderer::Display() const
     // 纹理
     if(_texture)
     {
-        glBindTexture(GL_TEXTURE_2D, _texture->textureId);
+        _texture->BindTexture();
     }
 	glBindVertexArray(_mesh->vaoId);
 	// 模型空间->世界空间

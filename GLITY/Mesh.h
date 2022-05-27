@@ -6,8 +6,8 @@ class Mesh
 {
 private:
 	Mesh() :vertices(), indices(), drawType(GL_TRIANGLES) {}
-	static std::vector<Mesh*> Meshes;
 public:
+	static std::vector<Mesh*> Meshes;
 	/// <summary>
 	/// 顶点
 	/// </summary>

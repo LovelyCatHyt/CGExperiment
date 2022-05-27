@@ -4,15 +4,22 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-Texture::Texture(const std::string& path, GLint wrapMode, bool mipMap, GLint filterMode)
+Texture::Texture(const std::string& path, GLint wrapMode, bool mipMap, GLint filterMode):
+    wrapMode(wrapMode), filterMode(filterMode)
 {
     // 生成纹理, 设置参数
     glGenTextures(1, &textureId);
-    glBindTexture(GL_TEXTURE_2D, textureId);
-    glTextureParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapMode);
-    glTextureParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapMode);
-    glTextureParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filterMode);
-    glTextureParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filterMode);
+    BindTexture();
+    // 环绕模式
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapMode);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapMode);
+    // 过滤模式
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filterMode);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filterMode);
+    // 各向异性过滤
+    GLfloat maxAnisotropy;
+    glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &maxAnisotropy);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, maxAnisotropy);
     // 加载图像
     unsigned char* data = stbi_load(path.c_str(), &width, &height, &channel, 0);
 #ifdef _DEBUG
@@ -26,4 +33,10 @@ Texture::Texture(const std::string& path, GLint wrapMode, bool mipMap, GLint fil
     }
 
     stbi_image_free(data);
+}
+
+void Texture::BindTexture() const
+{
+    glBindTexture(GL_TEXTURE_2D, textureId);
+
 }
