@@ -25,7 +25,7 @@ Mesh& Mesh::LoadMesh(const std::string& path)
     }
     // 仅加载第一个网格
     auto& loadedMesh = loader.LoadedMeshes[0];
-    for(objl::Vertex v : loadedMesh.Vertices)
+    for (objl::Vertex v : loadedMesh.Vertices)
     {
         const auto& pos = v.Position;
         const auto& normal = v.Normal;
@@ -33,7 +33,7 @@ Mesh& Mesh::LoadMesh(const std::string& path)
         // 坐标系貌似反了, 修正
         m.vertices.emplace_back(pos.X, pos.Y, -pos.Z);
         m.normals.emplace_back(normal.X, normal.Y, -normal.Z);
-        m.textcoords.emplace_back(textcoord.X, textcoord.Y, 0);
+        m.textcoords.emplace_back(1 - textcoord.X, textcoord.Y, 0);
     }
 
     m.indices = loadedMesh.Indices;

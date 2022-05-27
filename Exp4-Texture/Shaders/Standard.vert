@@ -4,7 +4,7 @@ layout (location = 1) in vec3 normal;
 layout (location = 2) in vec3 textCoord;
 out vec4 color;
 out vec3 modelPosition;
-out vec4 ndcPosition;
+// out vec4 ndcPosition;
 out vec3 fTextCoord;
 out vec3 fNormal;
 
@@ -18,7 +18,7 @@ void main()
     gl_Position = combinedMat * vec4(vPosition, 1);
     // gl_Position = gl_Position / gl_Position.w;
 
-    ndcPosition = gl_Position;
+    // ndcPosition = gl_Position;
 	modelPosition = vPosition;
 	color = vec4(1,0,0,1);
     fTextCoord = textCoord;

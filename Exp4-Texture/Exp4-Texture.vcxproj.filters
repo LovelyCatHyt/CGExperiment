@@ -16,13 +16,13 @@
     <ClInclude Include="TriangleDriver.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Shaders\ChessBoard.frag">
-      <Filter>Shaders</Filter>
-    </None>
     <None Include="Shaders\ColorCircle.frag">
       <Filter>Shaders</Filter>
     </None>
     <None Include="Shaders\Standard.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\Standard.frag">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>

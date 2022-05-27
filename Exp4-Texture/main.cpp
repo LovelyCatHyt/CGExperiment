@@ -14,50 +14,37 @@ GameObject* triangleObj;
 void init() {
 
     // Meshes------------------------------------------------------------------------------
-    // 四面体
+    // 异形体
     auto& impossibleTriangle = Mesh::LoadMesh("Models/ImpossibleCube.obj");
-    // 正方体
-    auto& cubeMesh = Mesh::GenMesh();
-    glEnable(GL_PRIMITIVE_RESTART);
-    glPrimitiveRestartIndex(0xFFFF);
-    cubeMesh
-        .indices = { 0, 1, 5, 4, 7, 3, 2, 1, 0xFFFF, 6, 7, 4, 5, 1, 2, 3, 7};
-    cubeMesh
-        .vertices = std::vector<vmath::vec3>{
-                {-.5f,  -.5f,   -.5f },
-                {.5f,   -.5f,   -.5  },
-                {.5f,   -.5f,   .5f  },
-                {-.5f,  -.5f,   .5f  },
-                {-.5f,  .5f,    -.5f },
-                {.5f,   .5f,    -.5  },
-                {.5f,   .5f,    .5f  },
-                {-.5f,  .5f,    .5f  }
-    };
-    cubeMesh.drawType = GL_TRIANGLE_FAN;
+    // 正方形
+    auto& quadMesh = Mesh::LoadMesh("Models/Quad.obj");
+    
     Mesh::Init();
-    // GameObjects-------------------------------------------------------------------------
 
-    // 位置
-    auto& tran1 = GameObject::gameObjects.emplace_back().GetTransform();
-    tran1.SetPosition({ -1, 0, 0 });
-    tran1.SetRotation({ 0, 0, 0 });
-    tran1.SetScale({0.5, 0.5, 0.5f});
-    // tran1.AddComponent(triangle);
-    auto& tran2 = GameObject::gameObjects.emplace_back().GetTransform();
-    tran2.SetPosition({ 1, 0, 0 });
+    // GameObjects-------------------------------------------------------------------------
+    // 第一个物体
+    // 注: 物体初始化阶段不能新建新的物体/组件, 否则原指针大概率失效
+    // 除非预分配空间
+    auto& obj1 = GameObject::gameObjects.emplace_back();
+    auto& tran1 = obj1.GetTransform();
+    tran1.SetPosition({ 0, 2, 0 });
+    auto* texture = new Texture("Textures/Flag_CN_4096.png");
+    tran1.SetScale({static_cast<float>(texture->width) / static_cast<float>(texture->height), 1, 1});
+    MeshRenderer::renderers.emplace_back(
+        obj1,
+        &quadMesh,
+        "Shaders/Standard.vert", "Shaders/Standard.frag",
+        texture);
+    // 第二个物体
+    auto& obj2 = GameObject::gameObjects.emplace_back();
+    auto& tran2 = obj2.GetTransform();
+    tran2.SetPosition({ -1, 0, 0 });
     tran2.SetScale({ .5f, .5f, .5f });
-    tran2.AddComponent(square);
-    // MeshRenderers-----------------------------------------------------------------------
-    // 由于 vector 的扩容, 上面的地址已经失效了
-    // std::cerr<<"end-1 = "<< static_cast<GameObject*>(GameObject::gameObjects.end() - 1)<<std::endl;
     MeshRenderer::renderers.emplace_back(
-        GameObject::gameObjects[GameObject::gameObjects.size() - 2],
+        obj2,
         &impossibleTriangle,
-        "Shaders/Standard.vert", "Shaders/ColorCircle.frag");
-    MeshRenderer::renderers.emplace_back(
-        GameObject::gameObjects[GameObject::gameObjects.size() - 1],
-        &cubeMesh,
-        "Shaders/Standard.vert", "Shaders/ChessBoard.frag");
+        "Shaders/Standard.vert", "Shaders/ColorCircle.frag");    
+    
     // Camera------------------------------------------------------------------------------
     auto& cameraObj = GameObject::gameObjects.emplace_back();
     // TODO: delete camera...?
@@ -83,13 +70,13 @@ int main(int argc, char* argv[])
     // 显示模式
     glutInitDisplayMode(GLUT_RGBA);
     // 窗口大小
-    glutInitWindowSize(512, 512);
+    glutInitWindowSize(800, 600);
     // ??
     glutInitContextVersion(1, 3);
     // ??
     glutInitContextProfile(GLUT_CORE_PROFILE);
     // 创建窗口, 但是没人知道这个返回的 int 是什么东西
-    glutCreateWindow("ColorCircle Windows");
+    glutCreateWindow("Exp4-Texture");
     // 初始化 glew
     if (glewInit())
     {

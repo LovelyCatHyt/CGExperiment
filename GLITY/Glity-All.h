@@ -14,5 +14,6 @@
 #include "IAwake.h"
 #include "ILateUpdate.h"
 #include "Mesh.h"
+#include "Texture.h"
 #include "MeshRenderer.h"
 #include "GlityEntry.h"

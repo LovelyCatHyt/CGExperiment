@@ -175,6 +175,8 @@
     <ClInclude Include="Quaternion.h" />
     <ClInclude Include="Screen.h" />
     <ClInclude Include="ShaderUtil.h" />
+    <ClInclude Include="stb_image.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="TransformMgr.h" />
@@ -199,6 +201,7 @@
     <ClCompile Include="Quaternion.cpp" />
     <ClCompile Include="Screen.cpp" />
     <ClCompile Include="ShaderUtil.cpp" />
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="TransformMgr.cpp" />

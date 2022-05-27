@@ -186,7 +186,7 @@
     <ClCompile Include="TriangleDriver.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Shaders\ChessBoard.frag" />
+    <None Include="Shaders\Standard.frag" />
     <None Include="Shaders\ColorCircle.frag" />
     <None Include="Shaders\Standard.vert" />
   </ItemGroup>
