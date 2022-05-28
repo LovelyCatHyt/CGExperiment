@@ -12,8 +12,11 @@ public:
     GLuint textureId;
     GLuint wrapMode;
     GLuint filterMode;
-    explicit Texture(const std::string& path, GLint wrapMode = GL_REPEAT, bool mipMap = true, GLint filterMode = GL_LINEAR_MIPMAP_LINEAR);
+    bool enableAnisotropy;
+
+    explicit Texture(const std::string& path, GLint wrapMode = GL_REPEAT, bool mipMap = true, GLint filterMode = GL_LINEAR_MIPMAP_LINEAR, bool enableAnisotropy = true);
 
     void BindTexture() const;
+    void SetTextureParameters();
 };
 

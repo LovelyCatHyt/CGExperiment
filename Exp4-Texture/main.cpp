@@ -2,15 +2,15 @@
 
 #include "CameraDriver.h"
 #include "../GLITY/Glity-All.h"
-#include "CubeDriver.h"
-#include "TriangleDriver.h"
+#include "TextureParaSetter.h"
 
-CubeDriver square{ 2, 0.8f, .333333f };
-TriangleDriver triangle{};
 GameObject* squareObj;
 GameObject* triangleObj;
 
 void init() {
+
+    if (glutExtensionSupported("GL_EXT_texture_filter_anisotropic"))
+        std::cout<<"anisotropy is supported!"<<std::endl;
 
     // Meshes------------------------------------------------------------------------------
     Mesh::Meshes.reserve(2);
@@ -21,7 +21,8 @@ void init() {
     // 除非预分配空间
     auto& obj1 = GameObject::gameObjects.emplace_back();
     auto& tran1 = obj1.GetTransform();
-    tran1.SetPosition({ -1.95f, 0, 0 });
+    // TODO: remember to change it back
+    tran1.SetPosition({ -2.95f, 0, 0 });
     tran1.SetScale({.5f, .5f, .5f});
     tran1.SetRotation(Quaternion::Euler(0, -90, 0));
     auto* texture = new Texture("Textures/Flag_CN_4096.png");
@@ -39,9 +40,10 @@ void init() {
     // 隧道
     // 墙面
     auto& wall = Mesh::LoadMesh("Models/Wall_8x1.obj");
-    auto* wallTexture = new Texture("Textures/stone.png", GL_REPEAT, true, GL_NEAREST);
+    auto* wallTexture = new Texture("Textures/squareMoonMap.jpg", GL_REPEAT, true, GL_NEAREST);
     // 左
     auto& wall1 = GameObject::gameObjects.emplace_back();
+    wall1.AddComponent(*new TextureParaSetter(wall1));
     auto& wall1Tran = wall1.GetTransform();
     wall1Tran.SetPosition({ -2, 0, 0 });
     wall1Tran.SetScale({ 16, 2, 1 });
@@ -53,6 +55,7 @@ void init() {
         wallTexture);
     // 右
     auto& wall2 = GameObject::gameObjects.emplace_back();
+    
     auto& wall2Tran = wall2.GetTransform();
     wall2Tran.SetPosition({ 2, 0, 0 });
     wall2Tran.SetScale({ 16, 2, 1 });

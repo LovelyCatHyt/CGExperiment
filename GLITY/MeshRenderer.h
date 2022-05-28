@@ -6,7 +6,7 @@ class MeshRenderer : public virtual Component
 {
 private:	
 	Mesh* _mesh;
-    Texture* _texture;
+    
 	static std::map<std::string, GLuint> PathToProgramDict;
     
     static int GetShader(const char* shaderPathNoExtension);
@@ -18,6 +18,7 @@ public:
     static bool depthTest;
     static bool cullFace;
 
+    Texture* texture;
     GLuint shaderProgram;
 	MeshRenderer() = delete;
     MeshRenderer(MeshRenderer&& other) noexcept;

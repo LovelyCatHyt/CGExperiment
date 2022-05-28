@@ -11,7 +11,7 @@ bool MeshRenderer::cullFace = true;
 MeshRenderer::MeshRenderer(MeshRenderer&& other) noexcept :
     Component(other._gameObject),
     _mesh(other._mesh),
-    _texture(other._texture),
+    texture(other.texture),
     shaderProgram(other.shaderProgram)
 {
     other._gameObject = nullptr;
@@ -48,7 +48,7 @@ int MeshRenderer::GetShader(const char* vertShaderPath, const char* fragShaderPa
 MeshRenderer::MeshRenderer(GameObject& obj, Mesh* mesh, const char* shaderPathNoExtension, Texture* texture) :
     Component(obj),
     _mesh(mesh),
-    _texture(texture)
+    texture(texture)
 {
     shaderProgram = GetShader(shaderPathNoExtension);
 	obj.RegisterRenderer(*this);
@@ -57,7 +57,7 @@ MeshRenderer::MeshRenderer(GameObject& obj, Mesh* mesh, const char* shaderPathNo
 MeshRenderer::MeshRenderer(GameObject& obj, Mesh* mesh, const char* vertShaderPath, const char* fragShaderPath, Texture* texture) :
     Component(obj),
     _mesh(mesh),
-    _texture(texture)
+    texture(texture)
 {
     shaderProgram = GetShader(vertShaderPath, fragShaderPath);
     obj.RegisterRenderer(*this);
@@ -80,9 +80,9 @@ void MeshRenderer::Display() const
     if(!enabled) return;
 	glUseProgram(shaderProgram);
     // 纹理
-    if(_texture)
+    if(texture)
     {
-        _texture->BindTexture();
+        texture->BindTexture();
     }
 	glBindVertexArray(_mesh->vaoId);
 	// 模型空间->世界空间
