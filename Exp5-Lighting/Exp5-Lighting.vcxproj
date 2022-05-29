@@ -19,11 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{48f7c6ff-f2df-475a-810c-c65f3d643c21}</ProjectGuid>
+    <ProjectGuid>{09266EBD-FE72-476E-9A56-7F4D0614B856}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>_3DTransform</RootNamespace>
+    <RootNamespace>OpenGL_Render_01</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>3DTransform</ProjectName>
+    <ProjectName>Exp5-Lighting</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -113,10 +113,13 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>../Shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>GLITY.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -149,6 +152,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -162,14 +166,13 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="LoadShaders.h" />
-    <ClInclude Include="resource.h" />
+    <ClInclude Include="CameraDriver.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="vmath.h" />
+    <ClInclude Include="CubeRotate.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="LoadShaders.cpp" />
+    <ClCompile Include="CameraDriver.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -177,12 +180,13 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="CubeRotate.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="3DCoordTrans.frag" />
-    <None Include="3DCoordTrans.vert" />
-    <None Include="3DTransform.frag" />
-    <None Include="3DTransform.vert" />
+    <None Include="..\Resources\Shaders\Standard.frag" />
+    <None Include="..\Resources\Shaders\Standard.vert" />
+    <None Include="Shaders\Phong_Ground.frag" />
+    <None Include="Shaders\Phong_NoNormal.frag" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

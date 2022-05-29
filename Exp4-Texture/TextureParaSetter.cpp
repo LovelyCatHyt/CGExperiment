@@ -13,7 +13,7 @@ std::string TextureParaSetter::Name()
 void TextureParaSetter::Update(GameObject& obj)
 {
     auto& renderer = obj.Renderer();
-    auto* texture = renderer.texture;
+    auto* texture = renderer.texture1;
     bool changed = false;
     if (Input::GetKeyDown('1'))
     {

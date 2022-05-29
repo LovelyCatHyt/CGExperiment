@@ -9,8 +9,8 @@ GameObject* triangleObj;
 
 void init() {
 
-    if (glutExtensionSupported("GL_EXT_texture_filter_anisotropic"))
-        std::cout<<"anisotropy is supported!"<<std::endl;
+    /*if (glutExtensionSupported("GL_EXT_texture_filter_anisotropic"))
+        std::cout<<"anisotropy is supported!"<<std::endl;*/
 
     // Meshes------------------------------------------------------------------------------
     Mesh::Meshes.reserve(2);
@@ -21,15 +21,14 @@ void init() {
     // 除非预分配空间
     auto& obj1 = GameObject::gameObjects.emplace_back();
     auto& tran1 = obj1.GetTransform();
-    // TODO: remember to change it back
-    tran1.SetPosition({ -2.95f, 0, 0 });
+    tran1.SetPosition({ -1.95f, 0, 0 });
     tran1.SetScale({.5f, .5f, .5f});
     tran1.SetRotation(Quaternion::Euler(0, -90, 0));
-    auto* texture = new Texture("Textures/Flag_CN_4096.png");
+    auto* texture = new Texture("../Resources/Textures/Flag_CN_4096.png");
     tran1.SetScale({static_cast<float>(texture->width) / static_cast<float>(texture->height), 1, 1});
 
     // 正方形
-    auto& quadMesh = Mesh::LoadMesh("Models/Quad.obj");
+    auto& quadMesh = Mesh::LoadMesh("../Resources/Models/Quad.obj");
     
     MeshRenderer::renderers.emplace_back(
         obj1,
@@ -39,8 +38,8 @@ void init() {
 
     // 隧道
     // 墙面
-    auto& wall = Mesh::LoadMesh("Models/Wall_8x1.obj");
-    auto* wallTexture = new Texture("Textures/squareMoonMap.jpg", GL_REPEAT, true, GL_NEAREST);
+    auto& wall = Mesh::LoadMesh("../Resources/Models/Wall_8x1.obj");
+    auto* wallTexture = new Texture("../Resources/Textures/squareMoonMap.jpg", GL_REPEAT, true, GL_NEAREST);
     // 左
     auto& wall1 = GameObject::gameObjects.emplace_back();
     wall1.AddComponent(*new TextureParaSetter(wall1));
@@ -97,7 +96,7 @@ void init() {
         diamondBlock,
         &quadMesh,
         "Shaders/Standard.vert", "Shaders/Standard.frag",
-        new Texture("Textures/diamond_ore.png", GL_REPEAT, true, GL_NEAREST));
+        new Texture("../Resources/Textures/diamond_ore.png", GL_REPEAT, true, GL_NEAREST));
 
     Mesh::Init();
     // Camera------------------------------------------------------------------------------
