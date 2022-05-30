@@ -41,7 +41,8 @@ void init() {
     MeshRenderer::renderers.emplace_back(
         cube,
         &cubeMesh,
-        "../Resources/Shaders/Standard.vert", "Shaders/Phong_NoNormal.frag",
+        // "../Resources/Shaders/Standard.vert", "Shaders/Phong_NoNormal.frag",
+        "Shaders/Gouraud",
         new Texture("../Resources/Textures/metal_plate_diff_2k.jpg"), new Texture("../Resources/Textures/metal_plate_rough_2k.jpg")
     );
 

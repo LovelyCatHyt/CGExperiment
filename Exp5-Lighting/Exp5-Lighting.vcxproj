@@ -183,8 +183,9 @@
     <ClCompile Include="CubeRotate.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Resources\Shaders\Standard.frag" />
     <None Include="..\Resources\Shaders\Standard.vert" />
+    <None Include="Shaders\Gouraud.frag" />
+    <None Include="Shaders\Gouraud.vert" />
     <None Include="Shaders\Phong_Ground.frag" />
     <None Include="Shaders\Phong_NoNormal.frag" />
   </ItemGroup>

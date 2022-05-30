@@ -4,6 +4,8 @@
 class CubeRotate : public virtual Component, public virtual IUpdate
 {
     bool doRotate;
+    GLint _phongShader;
+    GLint _gouraudShader;
 public:
     explicit CubeRotate(GameObject& obj);
 
