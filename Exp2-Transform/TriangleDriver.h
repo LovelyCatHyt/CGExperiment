@@ -3,11 +3,10 @@
 
 class TriangleDriver : public virtual Component, public virtual IUpdate, public virtual IAwake
 {
-    GLint _timeLoc;
-    GLint _speedLoc;
+    GLint _angleLoc;
     GLint _centerLoc;
     GLint _sinTimeLoc;
-
+    float _angle;
 public:
     TriangleDriver();
     std::string Name() override;

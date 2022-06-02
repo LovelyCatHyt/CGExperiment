@@ -5,7 +5,6 @@
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="SquareDriver.cpp" />
     <ClCompile Include="TriangleDriver.cpp" />
-    <ClCompile Include="CameraDriver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -15,7 +14,6 @@
     </ClInclude>
     <ClInclude Include="SquareDriver.h" />
     <ClInclude Include="TriangleDriver.h" />
-    <ClInclude Include="CameraDriver.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\ChessBoard.frag">

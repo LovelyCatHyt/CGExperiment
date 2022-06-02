@@ -12,6 +12,14 @@ private:
     static int GetShader(const char* shaderPathNoExtension);
     static int GetShader(const char* vertShaderPath, const char* fragShaderPath);
     void SetTextureUniform();
+    void ScanUniform();
+
+    bool useProjectMatUniform;
+    bool useModelMatUniform;
+    bool useLightPosUniform;
+    bool useLightDirUniform;
+    bool useViewPosUniform;
+
 public:
     static std::vector<MeshRenderer> renderers;
     static const GLint projectMatLoc = 0;

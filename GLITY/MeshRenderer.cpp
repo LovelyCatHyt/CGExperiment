@@ -14,7 +14,12 @@ MeshRenderer::MeshRenderer(MeshRenderer&& other) noexcept :
     _mesh(other._mesh),
     texture1(other.texture1),
     texture2(other.texture2),
-    shaderProgram(other.shaderProgram)
+    shaderProgram(other.shaderProgram),
+    useProjectMatUniform(other.useProjectMatUniform),
+    useModelMatUniform(other.useModelMatUniform),
+    useLightPosUniform(other.useLightPosUniform),
+    useLightDirUniform(other.useLightDirUniform),
+    useViewPosUniform(other.useViewPosUniform)
 {
     other._gameObject = nullptr;
     if (_gameObject)
@@ -62,6 +67,15 @@ void MeshRenderer::SetTextureUniform()
 //    shaderProgram = GetShader(shaderPathNoExtension);
 //}
 
+void MeshRenderer::ScanUniform()
+{
+    useProjectMatUniform = GetUniformLoc("projectMat") != -1;
+    useModelMatUniform = GetUniformLoc("modelMat") != -1;
+    useLightPosUniform = GetUniformLoc("lightPos") != -1;
+    useLightDirUniform = GetUniformLoc("lightDir") != -1;
+    useViewPosUniform = GetUniformLoc("viewPos") != -1;
+}
+
 MeshRenderer::MeshRenderer(GameObject& obj, Mesh* mesh, const char* shaderPathNoExtension, Texture* texture, Texture* normalMap) :
     Component(obj),
     _mesh(mesh),
@@ -70,6 +84,7 @@ MeshRenderer::MeshRenderer(GameObject& obj, Mesh* mesh, const char* shaderPathNo
 {
     shaderProgram = GetShader(shaderPathNoExtension);
     SetTextureUniform();
+    ScanUniform();
     obj.RegisterRenderer(*this);
 }
 
@@ -81,6 +96,7 @@ MeshRenderer::MeshRenderer(GameObject& obj, Mesh* mesh, const char* vertShaderPa
 {
     shaderProgram = GetShader(vertShaderPath, fragShaderPath);
     SetTextureUniform();
+    ScanUniform();
     obj.RegisterRenderer(*this);
 }
 
@@ -115,9 +131,9 @@ void MeshRenderer::Display() const
     // 设置矩阵
     // 模型空间->世界空间
     const auto& transform = GetTransform();
-    glUniformMatrix4fv(modelMatLoc, 1, GL_FALSE, transform.LocalToWorldMat4X4().raw());
+    if(useModelMatUniform) glUniformMatrix4fv(modelMatLoc, 1, GL_FALSE, transform.LocalToWorldMat4X4().raw());
     // 世界空间->裁剪空间
-    if (Camera::main)
+    if (Camera::main && useProjectMatUniform)
     {
         glUniformMatrix4fv(projectMatLoc, 1, GL_FALSE, Camera::main->projectMat.raw());
         auto& camTran = Camera::main->GetTransform();
@@ -125,7 +141,7 @@ void MeshRenderer::Display() const
         // 观察位置
         glUniform3f(viewPosLoc, camPos[0], camPos[1], camPos[2]);
     }
-    glUniform3f(lightPosLoc, lightPos[0], lightPos[1], lightPos[2]);
+    if(useLightPosUniform) glUniform3f(lightPosLoc, lightPos[0], lightPos[1], lightPos[2]);
 
     glDrawElements(_mesh->drawType, static_cast<GLsizei>(_mesh->indices.size()), GL_UNSIGNED_INT, 0);
 }
